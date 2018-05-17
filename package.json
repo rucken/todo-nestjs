@@ -1,7 +1,7 @@
 {
   "name": "rucken-todo-nestjs",
-  "version": "0.3.0",
-  "description": "A simple application demonstrating the basic usage of permissions with NestJS (JWT, PasswordHash, User, Group, Permission, ContentType)",
+  "version": "2.0.0",
+  "description": "A simple todo application demonstrating the basic usage of Rucken and Angular5+ with NestJS",
   "repository": "https://github.com/rucken/todo-nestjs.git",
   "engines": {
     "node": "8.11.x",
@@ -26,8 +26,7 @@
   "license": "MIT",
   "scripts": {
     "clean": "./node_modules/.bin/del-cli dist www database/sqlitedb.db",
-    "start": "npm run start:prod",
-    "start:prod": "node index.js",
+    "start": "node index.js",
     "start:watch": "nodemon",
     "build:without-frontend": "npm-run-all clean docs migrate",
     "build": "npm-run-all clean frontend docs migrate",
@@ -37,7 +36,7 @@
     "migrate": "ts-node ./node_modules/typeorm/cli.js migration:run",
     "docs": "./node_modules/.bin/typedoc --ignoreCompilerErrors --excludeExternals --out www/docs src",
     "frontend:install": "cd frontend && npm install && cd ..",
-    "frontend:build": "cd frontend && npm run build && cd ..",
+    "frontend:build": "cd frontend && npm run app:build-mono_prod && cd ..",
     "frontend": "npm-run-all frontend:install frontend:build",
     "heroku-postbuild": "npm run build"
   },
