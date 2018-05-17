@@ -1,22 +1,25 @@
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { config } from 'dotenv';
-
+import * as express from 'express';
+import * as path from 'path';
 import { AppModule } from './apps/demo/app.module';
 import { CustomExceptionFilter } from './libs/core/exceptions/custom-exception.filter';
 import { ValidationPipe } from './libs/core/pipes/validation.pipe';
-import * as path from 'path';
-import * as express from 'express';
+
 
 async function bootstrap() {
 	config();
 	const packageBody = require('../package.json');
 
+	const FRONTEND_ROOT = path.resolve(__dirname, '..', 'frontend', 'apps', 'todo', 'dist', 'browser');
 	const WWW_ROOT = path.resolve(__dirname, '..', 'www');
 
 	const app = await NestFactory.create(AppModule);
 
+	app.use(express.static(FRONTEND_ROOT));
 	app.use(express.static(WWW_ROOT));
+	
 	app.use((req, res, next) => {
 		res.header("Access-Control-Allow-Origin", "*");
 		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
@@ -24,7 +27,7 @@ async function bootstrap() {
 		next();
 	});
 	app.useGlobalFilters(new CustomExceptionFilter(
-		path.join(WWW_ROOT, 'index.html')
+		path.join(FRONTEND_ROOT, 'index.html')
 	));
 	app.useGlobalPipes(new ValidationPipe());
 
