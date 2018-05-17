@@ -1,4 +1,4 @@
-import { ExceptionFilter, Catch, HttpStatus } from '@nestjs/common';
+import { ExceptionFilter, Catch, HttpStatus, NotFoundException } from '@nestjs/common';
 import { HttpException } from '@nestjs/core';
 import { ValidationError } from 'class-validator';
 import { JsonWebTokenError } from 'jsonwebtoken';
@@ -6,14 +6,14 @@ import { CustomValidationError } from './custom-validation.error';
 import { CustomError } from './custom.error';
 import { QueryFailedError } from 'typeorm';
 
-@Catch(SyntaxError, CustomValidationError, CustomError, JsonWebTokenError, QueryFailedError)
+@Catch(SyntaxError, CustomValidationError, CustomError, JsonWebTokenError, QueryFailedError, NotFoundException)
 export class CustomExceptionFilter implements ExceptionFilter {
     constructor(
         private _indexFile?: string
     ) {
 
     }
-    badRequest(response, data: Object) {
+    badRequest(response, data: Object, status = HttpStatus.BAD_REQUEST) {
         // todo: refactor after update nest to 5 version
         if (
             response.req.originalUrl.indexOf('/api/') !== 0 &&
@@ -22,10 +22,10 @@ export class CustomExceptionFilter implements ExceptionFilter {
         ) {
             response.sendFile(this._indexFile);
         } else {
-            response.status(HttpStatus.BAD_REQUEST).json(data);
+            response.status(status).json(data);
         }
     }
-    catch(exception: CustomValidationError | JsonWebTokenError | SyntaxError | QueryFailedError, response) {
+    catch(exception: CustomValidationError | JsonWebTokenError | SyntaxError | QueryFailedError | NotFoundException, response) {
         const errors = {};
         if (exception instanceof CustomValidationError) {
             if (process.env.DEBUG === 'true') {
@@ -83,6 +83,16 @@ export class CustomExceptionFilter implements ExceptionFilter {
             this.badRequest(response, {
                 message: exception.message ? exception.message : String(exception)
             });
+            return;
+        }
+        if (exception instanceof NotFoundException) {
+            if (process.env.DEBUG === 'true') {
+                this.badRequest(response, exception, HttpStatus.NOT_FOUND);
+                return;
+            }
+            this.badRequest(response, {
+                message: 'Not Found'
+            }, HttpStatus.NOT_FOUND);
             return;
         }
     }
