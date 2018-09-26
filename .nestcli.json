@@ -1,0 +1,25 @@
+{
+  "language": "ts",
+  "collection": "@nestjs/schematics",
+  "projects": {
+    "todo": {
+      "root": "src/apps/todo/",
+      "sourceRoot": "src/apps/todo",
+      "outputPath": "dist/apps/todo",
+      "projectType": "application"
+    },
+    "@todo-nestjs/core": {
+      "root": "src/libs/core/",
+      "sourceRoot": "src/libs/core",
+      "outputPath": "dist/libs/core",
+      "projectType": "library"
+    },
+    "@todo-nestjs/auth": {
+      "root": "src/libs/auth/",
+      "sourceRoot": "src/libs/auth",
+      "outputPath": "dist/libs/auth",
+      "projectType": "library"
+    }
+  },
+  "defaultProject": "todo"
+}

@@ -4,47 +4,48 @@
 [![Build Status][travis-image]][travis-url]
 [![dependencies-release][dependencies-image]][dependencies-url]
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/rucken/todo-nestjs)
 
-A simple todo application demonstrating the basic usage of [Rucken](https://github.com/rucken) and [Angular5+](https://angular.io) with [NestJS](https://nestjs.com) as backend.
+A simple application demonstrating the basic usage of permissions with NestJS (JWT, Passport, Facebook, Google+, User, Group, Permission)
 
+
+## Features
+
+* [NestJS](https://github.com/nestjs/nest) - a JS backend framework providing architecture out of the box with a syntax similar to Angular
+* [TypeORM](https://github.com/mongodb/mongo) - ORM for TypeScript and JavaScript (ES7, ES6, ES5). Supports MySQL, PostgreSQL, MariaDB, SQLite, MS SQL Server, Oracle, WebSQL databases.
+* [TypeScript](https://github.com/Microsoft/TypeScript) - superset of JS which compiles to JS, providing compile-time type checking
+* [Passport](https://github.com/jaredhanson/passport) - a popular library used to implement JavaScript authentication (Facebook, Google+)
+* [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) - a JavaScript json web tokens implementation by auth0
 
 ## Usage
 - clone or fork [repository](https://github.com/rucken/todo-nestjs.git) `git clone --recursive https://github.com/rucken/todo-nestjs.git`
-- make sure you have [node.js](https://nodejs.org/) installed version 6+
-- make sure you have NPM installed version 3+
-- copy `_env` to `.env` and set environments for use (on Windows copy with IDE)
+- make sure you have [node.js](https://nodejs.org/) installed version 8+
+- make sure you have NPM installed version 5+
+- copy `develop._env` to `develop.env` and set environments for use (on Windows copy with IDE)
 - run `npm install` to install project dependencies
-- run `npm build` to install project dependencies
-- run `npm run start` to fire up prod server (`npm run start:watch` - dev server)
-- Open browser to [`http://localhost:5000`](http://localhost:5000)
-
-## Demo application on [Heroku](https://rucken-todo-nestjs.herokuapp.com)
+- run `npm run build` to install project dependencies
+- run `npm run start:prod` to fire up prod server (`npm run start:dev` - dev server)
+- Open browser to [`http://localhost:5000/swagger`](http://localhost:5000/swagger)
 
 ### Users
 - user with admin group: admin@admin.com, password: 12345678
 - user with user group: user1@user1.com, password: 12345678
 - user with user group: user2@user2.com, password: 12345678
 
-### Site
-- local: http://localhost:5000
-- online: https://rucken-todo-nestjs.herokuapp.com
-
 ### Swagger
-- local: http://localhost:5000/swagger
-- online: https://rucken-todo-nestjs.herokuapp.com/swagger
+- local: [`http://localhost:5000/swagger`](http://localhost:5000/swagger)
+- online on heroku: [`https://rucken-todo-nestjs.herokuapp.com/swagger`](https://rucken-todo-nestjs.herokuapp.com/swagger)
+- online on now with db sqlite: [`https://rucken-todo-nestjs.now.sh/swagger`](https://rucken-todo-nestjs.now.sh/swagger)
+- online on now with db postgres: [`https://rucken-todo-nestjs-postgres.now.sh/swagger`](https://rucken-todo-nestjs-postgres.now.sh/swagger)
 - apiKey template: ```JWT <token_generated_on_login>```
 
 ### Docs
-- local: http://localhost:5000/docs
-- online: https://rucken-todo-nestjs.herokuapp.com/docs
+- local: [`http://localhost:5000/docs`](http://localhost:5000/docs)
+- online on now: [`https://rucken-todo-nestjs.now.sh/docs`](https://rucken-todo-nestjs.now.sh/docs)
 
-## Quick links
-
-[Live demo](https://rucken.github.io/todo) [[source]](https://github.com/rucken/todo) - Demo application (backend: http://www.mockapi.io).
-
-[Live demo (SSR)](https://rucken-todo.herokuapp.com) [[source]](https://github.com/rucken/todo) - Demo application with server side rendering (backend: http://www.mockapi.io).
-
-[Live demo (NestJS)](https://rucken-todo-nestjs.herokuapp.com) [[source]](https://github.com/rucken/todo-nestjs) - Demo application with live backend (backend: https://nestjs.com).
+### With UI on Angular 6+
+- online on now with gh-pages: [`https://rucken.github.io/todo`](https://rucken.github.io/todo)
+- online on now with ssr: [`https://rucken-todo.now.sh`](https://rucken-todo.now.sh)
 
 ## License
 

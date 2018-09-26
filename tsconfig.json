@@ -1,23 +1,41 @@
 {
   "compilerOptions": {
+    "skipLibCheck": true,
     "module": "commonjs",
     "declaration": false,
     "noImplicitAny": false,
     "removeComments": true,
-    "moduleResolution": "node",
     "noLib": false,
+    "allowSyntheticDefaultImports": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es6",
     "sourceMap": true,
     "allowJs": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "baseUrl": "./src",
+    "rootDir": "./src",
+    "paths": {
+      "@todo-nestjs/core": [
+        "libs/core"
+      ],
+      "@todo-nestjs/core/*": [
+        "libs/core/*"
+      ],
+      "@todo-nestjs/auth": [
+        "libs/auth"
+      ],
+      "@todo-nestjs/auth/*": [
+        "libs/auth/*"
+      ]
+    }
   },
-  "include": [
-    "src/**/*"
-  ],
   "exclude": [
+    "frontend",
+    "dist",
     "node_modules",
-    "**/*.spec.ts"
+    "**/*.spec.ts",
+    "**/*-spec.ts",
+    "**/*.js"
   ]
 }

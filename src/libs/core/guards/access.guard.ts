@@ -1,56 +1,44 @@
-import { CanActivate, ExecutionContext, Guard } from '@nestjs/common';
+import { ExecutionContext, Injectable, Logger } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { plainToClass } from 'class-transformer';
-import { IncomingMessage } from 'http';
-
+import { AuthGuard } from '@nestjs/passport';
 import { User } from '../entities/user.entity';
-import { GroupsService } from '../services/groups.service';
-import { TokenService } from '../services/token.service';
 
-@Guard()
-export class AccessGuard implements CanActivate {
-    constructor(
-        private readonly reflector: Reflector,
-        private readonly tokenService: TokenService,
-        private readonly groupsService: GroupsService
-    ) {
-        //workaround
-        this.groupsService.fullLoadAll();
+@Injectable()
+export class AccessGuard extends AuthGuard('jwt') {
+  constructor(
+    private readonly reflector: Reflector
+  ) {
+    super();
+  }
+  async canActivate(context: ExecutionContext) {
+    try {
+      await super.canActivate(context);
+    } catch (error) {
+
     }
-
-    canActivate(req: IncomingMessage, context: ExecutionContext): boolean {
-        const { parent, handler } = context;
-        const authorizationHeader = req.headers['authorization'] ?
-            String(req.headers['authorization']) : null;
-        const roles = this.reflector.get<string[]>('roles', handler);
-        const permissions = this.reflector.get<string[]>('permissions', handler);
-
-        if (
-            authorizationHeader &&
-            authorizationHeader.indexOf(process.env.JWT_AUTH_HEADER_PREFIX) === 0) {
-            let token =
-                process.env.JWT_AUTH_HEADER_PREFIX ?
-                    authorizationHeader.split(process.env.JWT_AUTH_HEADER_PREFIX)[1] :
-                    authorizationHeader;
-            token = token.trim();
-            if (token && token !== 'undefined' && this.tokenService.verify(token)) {
-                const data: any = this.tokenService.decode(token);
-                req['user'] = plainToClass(User, data);
-                req['user'].groups = data.groups.map(group =>
-                    this.groupsService.getGroupByName(group.name)
-                );
-            }
-        }
-
-        const hasRole = roles ? roles.filter(roleName =>
-            req['user'] &&
-            req['user'][roleName]
-        ).length > 0 : null;
-
-        const hasPermission = permissions ?
-            req['user'] &&
-            req['user'] instanceof User &&
-            req['user'].checkPermissions(permissions) : null;
-        return hasRole === true || hasPermission === true || (hasRole === null && hasPermission === null);
-    }
+    const roles = this.reflector.get<string[]>('roles', context.getHandler());
+    const permissions = this.reflector.get<string[]>(
+      'permissions',
+      context.getHandler()
+    );
+    const request = context.switchToHttp().getRequest();
+    const user: User = request.user;
+    Logger.log(JSON.stringify(user), AccessGuard.name);
+    Logger.log(JSON.stringify({
+      roles,
+      permissions
+    }), AccessGuard.name);
+    const hasRole = roles
+      ? roles.filter(roleName => user && user instanceof User && user[roleName])
+        .length > 0
+      : null;
+    const hasPermission = permissions
+      ? user && user instanceof User && user.checkPermissions(permissions)
+      : null;
+    return (
+      hasRole === true ||
+      hasPermission === true ||
+      (hasRole === null && hasPermission === null)
+    );
+  }
 }

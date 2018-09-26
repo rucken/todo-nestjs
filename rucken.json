@@ -1,0 +1,5 @@
+{
+  "name": "todo",
+  "backend": "nestjs",
+  "frontend": "angular"
+}
