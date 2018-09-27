@@ -3,6 +3,7 @@
 
 # dependencies
 /node_modules
+/frontend/node_modules
 
 # IDE
 .idea/
@@ -29,6 +30,7 @@ npm-debug.log
 # dist
 /dist
 /database/sqlitedb.db
-/database/sqlitedb.db
 /www
 frontend/index.html
+frontend/server.js
+frontend/dist

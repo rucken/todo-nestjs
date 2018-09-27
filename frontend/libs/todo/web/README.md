@@ -33,7 +33,7 @@ MIT
 [travis-url]: https://travis-ci.org/rucken/todo
 [gitter-image]: https://img.shields.io/gitter/room/rucken/todo.js.svg
 [gitter-url]: https://gitter.im/rucken/todo
-[npm-image]: https://badge.fury.io/js/%40rucken%todo-web.svg
+[npm-image]: https://badge.fury.io/js/%40rucken%2Ftodo-web.svg
 [npm-url]: https://npmjs.org/package/@rucken/todo-web
 [dependencies-image]: https://david-dm.org/rucken/todo-web/status.svg
 [dependencies-url]: https://david-dm.org/rucken/todo-web
