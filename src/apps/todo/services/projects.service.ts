@@ -19,9 +19,8 @@ export class ProjectsService {
     @InjectRepository(Project) private readonly repository: Repository<Project>,
     @InjectRepository(Status)
     private readonly statusRepository: Repository<Status>,
-    @InjectRepository(Task)
-    private readonly taskRepository: Repository<Task>
-  ) { }
+    @InjectRepository(Task) private readonly taskRepository: Repository<Task>
+  ) {}
   async create(options: { item: Project }, user?: User) {
     try {
       options.item = await this.repository.save(options.item);
@@ -36,7 +35,7 @@ export class ProjectsService {
     if (
       user &&
       options.item.users.filter(eachUser => user.id === eachUser.id).length ===
-      0
+        0
     ) {
       options.item.users.push(user);
     }
@@ -187,7 +186,7 @@ export class ProjectsService {
       }
       options.sort =
         options.sort &&
-          new Project().hasOwnProperty(options.sort.replace('-', ''))
+        new Project().hasOwnProperty(options.sort.replace('-', ''))
           ? options.sort
           : '-id';
       const field = options.sort.replace('-', '');

@@ -1,4 +1,9 @@
-import { BadRequestException, Injectable, Logger, UnauthorizedException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  Logger,
+  UnauthorizedException
+} from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { GroupsService, User } from '@todo-nestjs/core';
 import { plainToClass } from 'class-transformer';

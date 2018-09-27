@@ -1,4 +1,11 @@
-import { DynamicModule, HttpModule, MiddlewareConsumer, Module, NestModule, Provider } from '@nestjs/common';
+import {
+  DynamicModule,
+  HttpModule,
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  Provider
+} from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CoreModule, entities as coreEntities } from '@todo-nestjs/core';
 import { authenticate } from 'passport';
