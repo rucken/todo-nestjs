@@ -1,5 +1,5 @@
 {
-  "name": "todo-core-nestjs",
+  "name": "todo-todo-nestjs",
   "version": "3.0.0",
   "engines": {
     "node": ">=10",
