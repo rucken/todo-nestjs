@@ -19,7 +19,7 @@ export class ProjectStatusesGridComponent extends StatusesGridComponent
   @Input()
   project: Project;
   @Input()
-  modelDelete = {
+  modalDelete = {
     initialState: {
       title: translate('Delete status'),
       message: translate(
@@ -28,7 +28,7 @@ export class ProjectStatusesGridComponent extends StatusesGridComponent
     }
   };
   @Input()
-  modelAppendFromGrid = {
+  modalAppendFromGrid = {
     component: StatusesGridModalComponent,
     initialState: {
       title: translate('Select status for append to project')

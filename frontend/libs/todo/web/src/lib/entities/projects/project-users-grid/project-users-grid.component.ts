@@ -22,7 +22,7 @@ export class ProjectUsersGridComponent extends UsersGridComponent
     }
   };
   @Input()
-  modelDelete = {
+  modalDelete = {
     initialState: {
       title: translate('Delete user'),
       message: translate(
@@ -31,7 +31,7 @@ export class ProjectUsersGridComponent extends UsersGridComponent
     }
   };
   @Input()
-  modelAppendFromGrid = {
+  modalAppendFromGrid = {
     component: UsersGridModalComponent,
     initialState: {
       title: translate('Select user for append to project'),

@@ -20,7 +20,7 @@ export class ProjectsGridComponent extends BaseEntityListComponent<Project>
     class: 'modal-lg'
   };
   @Input()
-  modelDelete = {
+  modalDelete = {
     class: 'modal-md'
   };
   @Input()

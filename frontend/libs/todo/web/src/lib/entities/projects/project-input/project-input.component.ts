@@ -18,7 +18,7 @@ export class ProjectInputComponent extends ProjectsGridComponent
   @Output()
   select = new EventEmitter<Project>();
   @Input()
-  modelAppendFromGrid = {
+  modalAppendFromGrid = {
     component: ProjectsGridModalComponent,
     initialState: {
       title: translate('Select project'),
