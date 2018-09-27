@@ -1,0 +1,6 @@
+{
+  "port": 4201,
+  "server": {
+    "baseDir": "./dist/todo"
+  }
+}

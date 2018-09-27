@@ -1,0 +1,74 @@
+<form
+    [formGroup]="form"
+    novalidate>
+    <prompt-form-modal
+        [title]="title"
+        [message]="message"
+        [infoMessage]="infoMessage"
+        [errorMessage]="errorMessage"
+        [noTitle]="noTitle"
+        [yesTitle]="yesTitle"
+        [readonly]="readonly"
+        (no)="onNoClick()"
+        (yes)="onYesClick()"
+        [data]="data"
+        [processing]="processing$ | async">
+        <div class="row">
+            <div class="col-md-6">
+                <form-group
+                    [checkIsDirty]="checkIsDirty"
+                    [form]="form"
+                    name="title"
+                    [title]="strings.title"
+                    focus>
+                    <input
+                        formControlName="title"
+                        [readonly]="readonly">
+                </form-group>
+                <form-group
+                    [checkIsDirty]="checkIsDirty"
+                    [form]="form"
+                    name="isPublic">
+                    <label>
+                        <input
+                            formControlName="isPublic"
+                            type="checkbox"
+                            [readonly]="readonly"
+                            [disableControl]="readonly">
+                        {{strings.isPublic | translate}}
+                    </label>
+                </form-group>
+            </div>
+            <div class="col-md-6">
+                <form-group
+                    [checkIsDirty]="checkIsDirty"
+                    [form]="form"
+                    name="description"
+                    [title]="strings.description">
+                    <input
+                        formControlName="description"
+                        [readonly]="readonly">
+                </form-group>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <project-statuses-grid
+                    [mockedItems]="data.statuses"
+                    [project]="data"
+                    (mockedItemsChange)="onStatusesChange($event)"
+                    [readonly]="readonly"
+                    [title]="strings.statuses"
+                    [apiUrl]="apiUrl"></project-statuses-grid>
+            </div>
+            <div class="col-md-6">
+                <project-users-grid
+                    [mockedItems]="data.users"
+                    (mockedItemsChange)="onUsersChange($event)"
+                    [readonly]="readonly"
+                    [title]="strings.users"
+                    [apiUrl]="apiUrl"></project-users-grid>
+            </div>
+        </div>
+    </prompt-form-modal>
+</form>

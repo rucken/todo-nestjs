@@ -1,0 +1,8 @@
+{
+    "alias": [
+        "rucken-todo.now.sh"
+    ],
+    "env": {
+        "DEBUG": "@debug"
+    }
+}

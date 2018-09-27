@@ -1,0 +1,109 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.1.1\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Language: ru\n"
+
+msgid "Id"
+msgstr "Ид."
+
+msgid "Title"
+msgstr "Заголовок"
+
+msgid "Description"
+msgstr "Описание"
+
+msgid "Is public"
+msgstr "Публичный"
+
+msgid "Created at"
+msgstr "Дата создания"
+
+msgid "Updated at"
+msgstr "Дата изменения"
+
+msgid "Statuses"
+msgstr "Статусы"
+
+msgid "Tasks"
+msgstr "Задачи"
+
+msgid "Users"
+msgstr "Пользователи"
+
+msgid "Add new project"
+msgstr "Добавить проект"
+
+msgid "Project #{{id}}"
+msgstr "Проекта #{{id}}"
+
+msgid "Update project #{{id}}"
+msgstr "Редактирование проекта #{{id}}"
+
+msgid "Delete project #{{id}}"
+msgstr "Удалить проект  #{{id}}"
+
+msgid "Do you really want to delete project?"
+msgstr "Вы действительно хотите удалить этот проект?"
+
+msgid "Yes"
+msgstr "Да"
+
+msgid "No"
+msgstr "Нет"
+
+msgid "Project"
+msgstr "Проект"
+
+msgid "Name"
+msgstr "Наименование"
+
+msgid "Add new status"
+msgstr "Создание нового статуса"
+
+msgid "Status #{{id}}"
+msgstr "Статус #{{id}}"
+
+msgid "Update status #{{id}}"
+msgstr "Изменить статус #{{id}}"
+
+msgid "Delete status #{{id}}"
+msgstr "Удалить статус  #{{id}}"
+
+msgid "Do you really want to delete status?"
+msgstr "Вы действительно хотите удалить статус?"
+
+msgid "Status"
+msgstr "Статус"
+
+msgid "Open at"
+msgstr "Дата открытия"
+
+msgid "Close at"
+msgstr "Дата закрытия"
+
+msgid "Range"
+msgstr "Диапазон"
+
+msgid "Add new task"
+msgstr "Создание новой задачи"
+
+msgid "Task #{{id}}"
+msgstr "Задача #{{id}}"
+
+msgid "Update task #{{id}}"
+msgstr "Изменить задачу  #{{id}}"
+
+msgid "Delete task #{{id}}"
+msgstr "Удалить задачу  #{{id}}"
+
+msgid "Do you really want to delete task?"
+msgstr "Вы действительно хотите удалить задачу?"

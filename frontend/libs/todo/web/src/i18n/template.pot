@@ -1,0 +1,59 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Select project"
+msgstr ""
+
+msgid "Select"
+msgstr ""
+
+msgid "Delete status"
+msgstr ""
+
+msgid "Do you really want to delete status \"{{title}}\" from project?"
+msgstr ""
+
+msgid "Select status for append to project"
+msgstr ""
+
+msgid "Delete user"
+msgstr ""
+
+msgid "Do you really want to delete user \"{{fullName}}\" from project?"
+msgstr ""
+
+msgid "Select user for append to project"
+msgstr ""
+
+msgid "Projects"
+msgstr ""
+
+msgid "Select status"
+msgstr ""
+
+msgid "Statuses"
+msgstr ""
+
+msgid "Select task"
+msgstr ""
+
+msgid "Tasks"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Append"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Create"
+msgstr ""
+
+msgid "Close"
+msgstr ""

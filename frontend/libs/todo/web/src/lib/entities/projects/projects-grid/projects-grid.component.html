@@ -1,0 +1,48 @@
+<entity-grid
+    [title]="title"
+    [items]="items$ | async"
+    (selected)="onSelected($event)"
+    [columns]="'change_project'|perm:['title','users']:['title','users','isPublic','action']:['title','users']|async"
+    [translatedCells]="['isPublic']"
+    [readonly]="readonly"
+    [strings]="strings"
+    (create)="onCreateClick($event)"
+    (update)="onUpdateClick($event)"
+    (delete)="onDeleteClick($event)"
+    (view)="onViewClick($event)"
+    (search)="onSearch($event)"
+    (changeOrder)="onChangeOrder($event)"
+    [paginationMeta]="paginationMeta$ | async"
+    [enableCreate]="'add_project' | perm:false | async"
+    [enableUpdate]="'change_project' | perm:false | async"
+    [enableDelete]="'delete_project' | perm:false | async"
+    (changePage)="onChangePage($event)"
+    [processing]="processing$ | async"
+    [gridCellActionContent]="gridCellActionContent"
+    #grid>
+</entity-grid>
+<ng-template
+    #gridCellActionContent
+    let-ctx>
+    <button
+        type="button"
+        class="btn btn-default btn-sm"
+        (click)="grid.onUpdate(ctx.item)"
+        *ngIf="grid.isEnableUpdate && (ctx.item|userPerm)">
+        <fa-icon [icon]="['fas', 'edit']"></fa-icon>
+    </button>
+    <button
+        type="button"
+        class="btn btn-default btn-sm"
+        (click)="grid.onDelete(ctx.item)"
+        *ngIf="grid.isEnableDelete && (ctx.item|userPerm)">
+        <fa-icon [icon]="['fas', 'trash']"></fa-icon>
+    </button>
+    <button
+        type="button"
+        class="btn btn-default btn-sm"
+        (click)="grid.onView(ctx.item)"
+        *ngIf="!(ctx.item|userPerm)">
+        <fa-icon [icon]="['fas', 'eye']"></fa-icon>
+    </button>
+</ng-template>
