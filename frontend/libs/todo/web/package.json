@@ -1,6 +1,6 @@
 {
   "name": "@rucken/todo-web",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "engines": {
     "node": ">=10",
     "npm": ">=6.4.0"
@@ -34,10 +34,10 @@
   ],
   "peerDependencies": {
     "rxjs": "^6.3.2",
-    "@angular/forms": "^6.1.8",
-    "@angular/common": "^6.1.8",
-    "@angular/compiler": "^6.1.8",
-    "@angular/core": "^6.1.8"
+    "@angular/forms": "^6.1.9",
+    "@angular/common": "^6.1.9",
+    "@angular/compiler": "^6.1.9",
+    "@angular/core": "^6.1.9"
   },
   "dependencies": {
     "@ngx-translate/core": "^10.0.2",
@@ -46,8 +46,8 @@
     "ngx-dynamic-form-builder": "^0.4.4",
     "ngx-permissions": "^6.0.1",
     "ngx-repository": "^0.4.2",
-    "@rucken/core": "^3.3.2",
-    "@rucken/web": "^3.3.2",
+    "@rucken/core": "^3.3.3",
+    "@rucken/web": "^3.3.3",
     "object-path": "^0.11.4"
   }
 }

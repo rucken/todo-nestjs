@@ -2,7 +2,7 @@
     [title]="title"
     [items]="items$ | async"
     (selected)="onSelected($event)"
-    [columns]="'change_project'|perm:['title','users']:['title','users','isPublic','action']:['title','users']|async"
+    [columns]="'change_project'|perm:false:['title','users','isPublic','action']:['title','users']|async"
     [translatedCells]="['isPublic']"
     [readonly]="readonly"
     [strings]="strings"

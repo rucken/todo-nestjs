@@ -1,3 +1,19 @@
+<a name="2.1.0"></a>
+# [2.1.0](https://github.com/rucken/todo/compare/2.0.1...2.1.0) (2018-09-27)
+
+
+### Bug Fixes
+
+* **demo:** Support include project as git submodule to backend ([7ecd3f3](https://github.com/rucken/todo/commit/7ecd3f3))
+* change modal options names ([b2c8cf0](https://github.com/rucken/todo/commit/b2c8cf0))
+
+
+### Features
+
+* Rewrite all project ([951fc8c](https://github.com/rucken/todo/commit/951fc8c))
+
+
+
 <a name="2.0.1"></a>
 ## [2.0.1](https://github.com/rucken/todo/compare/2.0.0...2.0.1) (2018-05-16)
 
