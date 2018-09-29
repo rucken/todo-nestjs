@@ -71,7 +71,7 @@
     "frontend:install": "cd frontend && npm install",
     "frontend:build": "cd frontend && npm run build",
     "frontend:copy-readme-from-backend": "./node_modules/.bin/cp-cli ./README.md ./frontend",
-    "frontend:copy-to-backend": "./node_modules/.bin/cp-cli ./frontend/dist/todo ./www"
+    "frontend:copy-to-backend": "./node_modules/.bin/cp-cli ./frontend/dist/todo-client ./www"
   },
   "dependencies": {
     "@nestjs/common": "^5.3.7",
