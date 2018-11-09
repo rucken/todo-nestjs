@@ -89,7 +89,6 @@ export class AuthService {
     const newUser = await plainToClass(User, options).setPassword(
       options.password
     );
-    console.log(newUser);
     newUser.groups = [group];
     return this.usersService.create({ item: newUser });
   }
