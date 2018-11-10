@@ -70,20 +70,34 @@ export class AuthService {
       throw new BadRequestException('Error in load groups');
     }
     if (options.email) {
-      const userOfEmail: { user } = await this.usersService.findByEmail(
-        options
-      );
-      throw new ConflictException(
-        `User with email "${options.email}" is exists`
-      );
+      let userOfEmail: { user };
+      try {
+        userOfEmail = await this.usersService.findByEmail(
+          options
+        );
+      } catch (error) {
+        userOfEmail = undefined;
+      }
+      if (userOfEmail) {
+        throw new ConflictException(
+          `User with email "${options.email}" is exists`
+        );
+      }
     }
     if (options.username) {
-      const userOfUsername: { user } = await this.usersService.findByUserName(
-        options
-      );
-      throw new ConflictException(
-        `User with username "${options.username}" is exists`
-      );
+      let userOfUsername: { user };
+      try {
+        userOfUsername = await this.usersService.findByUserName(
+          options
+        );
+      } catch (error) {
+        userOfUsername = undefined;
+      }
+      if (userOfUsername) {
+        throw new ConflictException(
+          `User with username "${options.username}" is exists`
+        );
+      }
     }
     const group = this.groupsService.getGroupByName({ name: 'user' });
     const newUser = await plainToClass(User, options).setPassword(
