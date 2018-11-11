@@ -1,10 +1,30 @@
-import { ChangeDetectionStrategy, Component, Inject, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  Input,
+  OnInit
+} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { ErrorsExtractor, translate, User, USERS_CONFIG_TOKEN } from '@rucken/core';
+import {
+  ErrorsExtractor,
+  translate,
+  User,
+  USERS_CONFIG_TOKEN
+} from '@rucken/core';
 import { Project } from '@rucken/todo-core';
-import { IBaseEntityModalOptions, MessageModalService, UsersGridComponent, UsersGridModalComponent } from '@rucken/web';
+import {
+  IBaseEntityModalOptions,
+  MessageModalService,
+  UsersGridComponent,
+  UsersGridModalComponent
+} from '@rucken/web';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { DynamicRepository, IRestProviderOptions, ProviderActionEnum } from 'ngx-repository';
+import {
+  DynamicRepository,
+  IRestProviderOptions,
+  ProviderActionEnum
+} from 'ngx-repository';
 import { ProjectUserModalComponent } from '../project-user-modal/project-user-modal.component';
 
 @Component({

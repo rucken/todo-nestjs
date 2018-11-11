@@ -1,9 +1,18 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-import { MetaLoader, MetaStaticLoader, PageTitlePositioning } from '@ngx-meta/core';
+import {
+  MetaLoader,
+  MetaStaticLoader,
+  PageTitlePositioning
+} from '@ngx-meta/core';
 import { TranslateService } from '@ngx-translate/core';
-import { AuthEmptyComponent, OauthGuard, RuI18n as CoreRuI18n, translate } from '@rucken/core';
+import {
+  AuthEmptyComponent,
+  OauthGuard,
+  RuI18n as CoreRuI18n,
+  translate
+} from '@rucken/core';
 import { RuI18n as TodoCoreRuI18n } from '@rucken/todo-core';
 import { RuI18n as TodoWebRuI18n } from '@rucken/todo-web';
 import { RuI18n as WebRuI18n } from '@rucken/web';

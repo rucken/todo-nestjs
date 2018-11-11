@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, Inject, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  Input,
+  OnInit
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { ErrorsExtractor } from '@rucken/core';

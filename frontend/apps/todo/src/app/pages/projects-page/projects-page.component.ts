@@ -1,4 +1,10 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  ViewChild
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '@rucken/core';
 import { Project } from '@rucken/todo-core';
@@ -27,7 +33,7 @@ export class ProjectsPageComponent implements OnDestroy, AfterViewInit {
     public activatedRoute: ActivatedRoute,
     private _userPermPipe: UserPermPipe,
     private _authService: AuthService
-  ) { }
+  ) {}
   ngAfterViewInit() {
     this._authService.current$
       .pipe(takeUntil(this._destroyed$))

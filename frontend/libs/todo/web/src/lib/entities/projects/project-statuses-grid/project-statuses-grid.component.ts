@@ -1,10 +1,20 @@
-import { ChangeDetectionStrategy, Component, Inject, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  Input,
+  OnInit
+} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ErrorsExtractor, translate, User } from '@rucken/core';
 import { Project, STATUSES_CONFIG_TOKEN } from '@rucken/todo-core';
 import { IBaseEntityModalOptions, MessageModalService } from '@rucken/web';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { DynamicRepository, IRestProviderOptions, ProviderActionEnum } from 'ngx-repository';
+import {
+  DynamicRepository,
+  IRestProviderOptions,
+  ProviderActionEnum
+} from 'ngx-repository';
 import { StatusModalComponent } from '../../statuses/status-modal/status-modal.component';
 import { StatusesGridModalComponent } from '../../statuses/statuses-grid-modal/statuses-grid-modal.component';
 import { StatusesGridComponent } from '../../statuses/statuses-grid/statuses-grid.component';

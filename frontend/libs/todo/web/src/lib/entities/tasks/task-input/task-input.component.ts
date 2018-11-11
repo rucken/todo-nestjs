@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output
+} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ErrorsExtractor, translate } from '@rucken/core';
 import { Task, TASKS_CONFIG_TOKEN } from '@rucken/todo-core';

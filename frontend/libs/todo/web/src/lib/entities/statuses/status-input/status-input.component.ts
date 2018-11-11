@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output
+} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ErrorsExtractor, translate } from '@rucken/core';
 import { STATUSES_CONFIG_TOKEN, StatusWithProject } from '@rucken/todo-core';
@@ -20,7 +28,7 @@ export class StatusInputComponent extends StatusesGridComponent
     component: StatusesGridModalComponent,
     initialState: {
       title: translate('Select status'),
-      yesTitle: translate('Select'),
+      yesTitle: translate('Select')
     }
   };
   @Output()
