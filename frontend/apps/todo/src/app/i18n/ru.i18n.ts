@@ -4,7 +4,7 @@ export const RuI18n = {
   Russian: 'Русский',
   English: 'Английский',
   Todo: 'Список задач',
-  'Core with Admin UI for web and native application maked on Angular6+': 'Ядро с пользовательским интерфейсом администратора для веб и нативных приложений, сделанных на Angular6 +',
+  'Core with Admin UI for web and native application maked on Angular7+': 'Ядро с пользовательским интерфейсом администратора для веб и нативных приложений, сделанных на Angular7 +',
   'Sign in with Facebook': 'Вход через Facebook',
   'Sign in with Google+': 'Вход через Google+',
   Account: 'Личный кабинет',

@@ -40,7 +40,7 @@ export const AppLangs = [
 ];
 export const ApplicationName = translate('Todo');
 export const ApplicationDescription = translate(
-  'Core with Admin UI for web and native application maked on Angular6+'
+  'Core with Admin UI for web and native application maked on Angular7+'
 );
 
 export function appMetaFactory(translateService: TranslateService): MetaLoader {

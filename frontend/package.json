@@ -8,7 +8,7 @@
   "private": true,
   "license": "MIT",
   "author": "EndyKaufman <admin@site15.ru>",
-  "description": "Core with UI for web and native todo application maked on Angular6+",
+  "description": "Core with UI for web and native todo application maked on Angular7+",
   "bugs": {
     "url": "https://github.com/rucken/todo/issues"
   },
@@ -19,7 +19,7 @@
   },
   "keywords": [
     "ngx",
-    "angular6",
+    "angular7",
     "ui",
     "web application",
     "seed",

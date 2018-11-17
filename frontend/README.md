@@ -64,7 +64,7 @@ MIT
 [![Gitter][gitter-image]][gitter-url]
 [![Join the chat at telegram][telegram-image]][telegram-url]
 
-Core with UI for web and native todo application maked on Angular6+
+Core with UI for web and native todo application maked on Angular7+
 
 ## Usage
 ```
@@ -76,7 +76,7 @@ npm run start:prod
 
 ## Quick links
 
-[@rucken/cli](https://github.com/rucken/cli) - Console tools to create and build [Angular6+](https://angular.io/) and [NestJS](https://nestjs.com/) application based on [Rucken](https://github.com/rucken) template
+[@rucken/cli](https://github.com/rucken/cli) - Console tools to create and build [Angular7+](https://angular.io/) and [NestJS](https://nestjs.com/) application based on [Rucken](https://github.com/rucken) template
 
 [Live demo: master (SPA on GhPages)](https://rucken.github.io/todo) [[source]](https://github.com/rucken/todo) - Demo application (backend: https://rucken-todo-nestjs.now.sh ).
 

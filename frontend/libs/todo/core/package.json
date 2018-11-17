@@ -5,11 +5,11 @@
     "node": ">=10",
     "npm": ">=6.4.0"
   },
-  "description": "Core with base class and entities for todo application maked on Angular6+",
+  "description": "Core with base class and entities for todo application maked on Angular7+",
   "keywords": [
     "ngx",
     "angular",
-    "angular6",
+    "angular7",
     "i18n",
     "shared",
     "services",
