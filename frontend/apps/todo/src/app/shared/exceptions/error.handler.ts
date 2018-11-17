@@ -22,8 +22,8 @@ export class CustomErrorHandler implements ErrorHandler {
         const message = error.message
           ? error.message
           : error && error.toString
-            ? error.toString()
-            : error;
+          ? error.toString()
+          : error;
         const messageModalService = this._injector.get(MessageModalService);
         messageModalService
           .error({
