@@ -1,0 +1,12 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "frontend/libs/todo/core/package.json",
+        "frontend/libs/todo/web/package.json",
+        "frontend/package.json",
+        "package.json"
+      ]
+    }
+  }
+}
