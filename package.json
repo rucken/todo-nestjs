@@ -10,7 +10,7 @@
     "name": "EndyKaufman",
     "email": "admin@site15.ru"
   },
-  "description": "Basic entities, services and controllers for todo application on NestJS REST backend",
+  "description": "A simple todo application with NestJS (Projects, Tasks, Statuses)",
   "bugs": {
     "url": "https://github.com/rucken/todo-nestjs/issues"
   },

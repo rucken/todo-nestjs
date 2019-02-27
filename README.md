@@ -8,7 +8,7 @@
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/rucken/todo-nestjs)
 
-Basic entities, services and controllers for todo application on [NestJS](https://github.com/nestjs/nest) REST backend
+A simple todo application with [NestJS](https://github.com/nestjs/nest) (Projects, Tasks, Statuses)
 
 ## Usage
 
