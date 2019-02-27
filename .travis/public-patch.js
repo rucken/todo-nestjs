@@ -6,7 +6,11 @@ const f_tsconfig_json = './deploy/tsconfig.json';
 var data = '', obj = {}, txt = '';
 
 data = fs.readFileSync(f_gitignore, 'utf8');
-txt = data.replace(/\/dist/g, '').replace(/\/client\/docs/g, '').replace(/\/client\/index.html/g, '');
+txt = data
+    .replace(/\/dist/g, '')
+    .replace(/\/client\/docs/g, '')
+    .replace(/\/client\/index.html/g, '')
+    .replace(/vendors/g, '');
 fs.writeFileSync(f_gitignore, txt, 'utf8');
 
 console.log('Updated .gitignore');
