@@ -41,7 +41,7 @@ copy_files() {
   mkdir ./deploy/scripts
   mkdir ./deploy/dist
   mkdir ./deploy/client
-  cp -rf ./vendors/* ./deploy/vendors
+  cp -rf ./vendors ./deploy
   cp -rf ./scripts/* ./deploy/scripts
   cp -rf ./dist/* ./deploy/dist
   cp -rf ./client/* ./deploy/client
