@@ -22,10 +22,11 @@ import { OutTasksDto } from '../dto/out-tasks.dto';
 import { Task } from '../entities/task.entity';
 import { TasksService } from '../services/tasks.service';
 
+@ApiUseTags('tasks')
 @ApiBearerAuth()
 @Controller('/api/tasks')
 export class TasksController {
-  constructor(private readonly service: TasksService) {}
+  constructor(private readonly service: TasksService) { }
   @Roles('isSuperuser')
   @Permissions('add_task')
   @HttpCode(HttpStatus.CREATED)
