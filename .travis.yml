@@ -1,9 +1,13 @@
 language: node_js
-cache:
-  directories:
-    - node_modules
-    - frontend/node_modules
 node_js:
-  - "8"
+- '11'
+addons:
+  ssh_known_hosts:
+  - "$REMOTE_HOST"
+  - "$REMOTE_HOST_IP"
+after_success:
+- chmod +x ".travis/public-deploy.sh"
+- ".travis/public-deploy.sh"
 before_install:
-  - npm install -g npm@6.1.0
+- openssl aes-256-cbc -K $encrypted_8c5969a1f9bc_key -iv $encrypted_8c5969a1f9bc_iv
+  -in .travis/deploy.key.enc -out .travis/deploy.key -d

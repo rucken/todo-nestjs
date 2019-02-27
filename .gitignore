@@ -1,9 +1,12 @@
+# Credentials
+.travis/*.key
+.travis/*.key.pub
+
 # config
 *.env
 
-# dependencies
-/node_modules
-/frontend/node_modules
+deploy
+vendors
 
 # IDE
 .idea/
@@ -30,7 +33,5 @@ npm-debug.log
 # dist
 /dist
 /database/sqlitedb.db
-/www
-frontend/index.html
-frontend/server.js
-frontend/dist
+/client/docs
+/client/index.html

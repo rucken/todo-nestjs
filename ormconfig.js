@@ -1,18 +1,21 @@
+const fg = require('fast-glob');
 const ConnectionString = require('connection-string');
 const load = require('dotenv').load;
-const path = require('path');
 const fs = require('fs');
-const NODE_ENV = process.env.NODE_ENV || 'develop';
-const DB_SOURCE_EXT = process.env.DB_SOURCE_EXT || (NODE_ENV === 'develop' ? 'ts' : 'js');
-// todo: wait resolve https://github.com/typeorm/typeorm/issues/2358
-const sourceRootKey = (DB_SOURCE_EXT === 'ts' || NODE_ENV === 'develop') ? 'sourceRoot' : 'outputPath';
-const nestCliConfig = JSON.parse(fs.readFileSync('.nestcli.json'));
+const path = require('path');
+const envName = process.env.NODE_ENV || 'develop';
+const isDevelop = envName === 'develop';
+const sourceRootKey = isDevelop ? 'sourceRoot' : 'outputPath';
+const entitiesExt = '{.js,.ts}';;
+const angularJson = JSON.parse(fs.readFileSync('angular.json'));
+const packageJson = JSON.parse(fs.readFileSync('package.json'));
+const vendors = packageJson.externalLibs || [];
 try {
-    fs.accessSync(`${NODE_ENV}.env`);
-    load({ path: `${NODE_ENV}.env` });
-    console.log(`env file: ${NODE_ENV}.env`);
+    fs.accessSync(`${envName}.env`);
+    load({ path: `${envName}.env` });
+    console.log(`env file: ${envName}.env`);
 } catch (error) {
-    console.log(`error on get env file: ${NODE_ENV}.env`);
+    console.log(`error on get env file: ${envName}.env`);
     try {
         fs.accessSync(`.env`);
         load();
@@ -22,13 +25,51 @@ try {
     }
 }
 
-const connectionString = new ConnectionString(process.env.DATABASE_URL || '');
-const projects = Object.keys(nestCliConfig.projects).map(key => nestCliConfig.projects[key]);
-const libs = Object.keys(nestCliConfig.projects).filter(key => nestCliConfig.projects[key].projectType === 'library').map(key => nestCliConfig.projects[key]);
-const apps = Object.keys(nestCliConfig.projects).filter(key => nestCliConfig.projects[key].projectType === 'application').map(key => nestCliConfig.projects[key]);
-const defaultProject = nestCliConfig.defaultProject;
-const defaultApp = nestCliConfig.projects[defaultProject];
+const connectionString = new ConnectionString(process.env.DATABASE_URL || 'sqlite://database/sqlitedb.db');
+const vendorsLibs = Object.keys(vendors).map(index => {
+    const vendorConfig = {};
+    vendorConfig[sourceRootKey] = vendors[index];
+    return vendorConfig;
+});
+const libs = Object.keys(angularJson.projects).filter(key => angularJson.projects[key].projectType === 'library').map(key => angularJson.projects[key]);
+const apps = Object.keys(angularJson.projects).filter(key => angularJson.projects[key].projectType === 'application').map(key => angularJson.projects[key]);
+const defaultProject = angularJson.defaultProject;
+const defaultApp = angularJson.projects[defaultProject];
+const migrationsDir = `${defaultApp[sourceRootKey]}/migrations`;
 
+const entities = (
+    fg.sync(
+        [
+            ...vendorsLibs,
+            ...libs,
+            ...apps
+        ].map(lib =>
+            `${lib[sourceRootKey] || lib.architect.build.options[sourceRootKey]}/**/entities/**/*.entity${entitiesExt}`
+        )
+    )
+);
+const migrations = normalizationFileList(
+    fg.sync(
+        [
+            ...vendorsLibs,
+            ...libs,
+            ...apps
+        ].map(lib =>
+            `${lib[sourceRootKey] || lib.architect.build.options[sourceRootKey]}/**/migrations/**/*${entitiesExt}`
+        )
+    )
+);
+const subscribers = (
+    fg.sync(
+        [
+            ...vendorsLibs,
+            ...libs,
+            ...apps
+        ].map(lib =>
+            `${lib[sourceRootKey] || lib.architect.build.options[sourceRootKey]}/**/subscribers/**/*${entitiesExt}`
+        )
+    )
+);
 if (connectionString.protocol === 'sqlite') {
     const dbFile =
         './' +
@@ -37,13 +78,13 @@ if (connectionString.protocol === 'sqlite') {
     module.exports = {
         type: 'sqlite',
         database: dbFile,
-        entities: [...libs, ...apps].map(lib => `${lib[sourceRootKey]}/**/entities/**/*.entity.${DB_SOURCE_EXT}`),
-        migrations: [...libs, ...apps].map(lib => `${lib[sourceRootKey]}/**/migrations/**/*.${DB_SOURCE_EXT}`),
-        subscribers: [...libs, ...apps].map(lib => `${lib[sourceRootKey]}/**/subscribers/**/*.${DB_SOURCE_EXT}`),
+        entities: entities,
+        migrations: migrations,
+        subscribers: subscribers,
         logging: 'all',
         synchronize: false,
         cli: {
-            migrationsDir: `${defaultApp[sourceRootKey]}/migrations`
+            migrationsDir: migrationsDir
         }
     }
 } else {
@@ -54,13 +95,36 @@ if (connectionString.protocol === 'sqlite') {
         username: connectionString.user,
         password: connectionString.password,
         database: connectionString.path && connectionString.path[0],
-        entities: [...libs, ...apps].map(lib => `${lib[sourceRootKey]}/**/entities/**/*.entity.${DB_SOURCE_EXT}`),
-        migrations: [...libs, ...apps].map(lib => `${lib[sourceRootKey]}/**/migrations/**/*.${DB_SOURCE_EXT}`),
-        subscribers: [...libs, ...apps].map(lib => `${lib[sourceRootKey]}/**/subscribers/**/*.${DB_SOURCE_EXT}`),
+        entities: entities,
+        migrations: migrations,
+        subscribers: subscribers,
         logging: 'all',
         synchronize: false,
         cli: {
-            migrationsDir: `${defaultApp[sourceRootKey]}/migrations`
+            migrationsDir: migrationsDir
         }
     }
+}
+
+function normalizationFileList(files) {
+    const newFiles = [];
+    for (var i = 0; i < files.length; i++) {
+        const filename = files[i];
+        if (filename.indexOf('.d.ts') === -1) {
+            var founded = false;
+            for (var j = 0; j < newFiles.length; j++) {
+                const filename = newFiles[j];
+                if (
+                    path.basename(filename, path.parse(filename).ext) ===
+                    path.basename(files[i], path.parse(files[i]).ext)
+                ) {
+                    founded = true;
+                }
+            }
+            if (!founded) {
+                newFiles.push(files[i]);
+            }
+        }
+    }
+    return newFiles;
 }
