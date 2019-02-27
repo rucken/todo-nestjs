@@ -1,3 +1,12 @@
+## [4.0.1](https://github.com/rucken/todo-nestjs/compare/4.0.0...4.0.1) (2019-02-27)
+
+
+### Bug Fixes
+
+* Update ApiUseTags for TasksController ([7815d85](https://github.com/rucken/todo-nestjs/commit/7815d85))
+
+
+
 # 4.0.0 (2019-02-27)
 
 
