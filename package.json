@@ -163,7 +163,7 @@
     "ts-loader": "5.3.3",
     "tslint": "5.12.1",
     "tslint-config-prettier": "1.17.0",
-    "webpack": "4.28.4",
+    "webpack": "4.29.6",
     "webpack-cli": "3.2.1",
     "webpack-node-externals": "1.7.2"
   },
