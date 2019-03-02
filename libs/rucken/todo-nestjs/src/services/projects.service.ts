@@ -30,6 +30,12 @@ export class ProjectsService {
     if (user && options.item.users.filter(eachUser => user.id === eachUser.id).length === 0) {
       options.item.users.push(user);
     }
+    options.item.users = options.item.users.map(eachUser => {
+      if (+eachUser.id < 0) {
+        eachUser.password = 'password';
+      }
+      return eachUser;
+    });
     try {
       options.item.statuses = await this.statusRepository.save(options.item.statuses);
     } catch (error) {
@@ -58,6 +64,12 @@ export class ProjectsService {
       status.id = status.id < 0 ? undefined : status.id;
       status.project = plainToClass(Project, options.item.id);
       return status;
+    });
+    options.item.users = options.item.users.map(eachUser => {
+      if (+eachUser.id < 0) {
+        eachUser.password = 'password';
+      }
+      return eachUser;
     });
     try {
       options.item.statuses = await this.statusRepository.save(options.item.statuses);
