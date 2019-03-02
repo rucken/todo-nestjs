@@ -15,7 +15,7 @@ export class ProjectsService {
     @InjectRepository(Status)
     private readonly statusRepository: Repository<Status>,
     @InjectRepository(Task) private readonly taskRepository: Repository<Task>
-  ) { }
+  ) {}
   async create(options: { item: Project }, user?: User) {
     try {
       options.item = await this.repository.save(options.item);
