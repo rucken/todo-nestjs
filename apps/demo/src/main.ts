@@ -19,7 +19,6 @@ if (config.env.name !== 'develop') {
   });
 }
 async function bootstrap() {
-
   /**
    * Create nest application
    */

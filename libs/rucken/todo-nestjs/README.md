@@ -39,7 +39,6 @@ A simple todo application with [NestJS](https://github.com/nestjs/nest) (Project
 - local: [`http://localhost:5000/docs`](http://localhost:5000/docs)
 - online: [`https://todo-nestjs.rucken.io/docs`](https://todo-nestjs.rucken.io/docs)
 
-
 ## License
 
 MIT

@@ -1,3 +1,13 @@
+## [4.0.2](https://github.com/rucken/todo-nestjs/compare/4.0.1...4.0.2) (2019-03-02)
+
+
+### Bug Fixes
+
+* Add password for new users added to project ([8e48013](https://github.com/rucken/todo-nestjs/commit/8e48013))
+* Update dependencies ([064e1e8](https://github.com/rucken/todo-nestjs/commit/064e1e8))
+
+
+
 ## [4.0.1](https://github.com/rucken/todo-nestjs/compare/4.0.0...4.0.1) (2019-02-27)
 
 
