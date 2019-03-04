@@ -1,3 +1,13 @@
+## [4.0.3](https://github.com/rucken/todo-nestjs/compare/4.0.2...4.0.3) (2019-03-04)
+
+
+### Bug Fixes
+
+* Change modules for correct import providers ([398e11a](https://github.com/rucken/todo-nestjs/commit/398e11a))
+* Update dependencies ([e2b06d7](https://github.com/rucken/todo-nestjs/commit/e2b06d7))
+
+
+
 ## [4.0.2](https://github.com/rucken/todo-nestjs/compare/4.0.1...4.0.2) (2019-03-02)
 
 
