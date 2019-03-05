@@ -5,16 +5,17 @@ import {
   Get,
   HttpCode,
   HttpStatus,
+  Inject,
+  MethodNotAllowedException,
   Param,
   ParseIntPipe,
   Post,
   Put,
   Query,
-  Req,
-  UseGuards
+  Req
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiImplicitParam, ApiImplicitQuery, ApiResponse, ApiUseTags } from '@nestjs/swagger';
-import { ParseIntWithDefaultPipe, Permissions, Roles } from '@rucken/core-nestjs';
+import { CORE_CONFIG_TOKEN, ICoreConfig, ParseIntWithDefaultPipe, Permissions, Roles } from '@rucken/core-nestjs';
 import { plainToClass } from 'class-transformer';
 import { InStatusDto } from '../dto/in-status.dto';
 import { OutStatusDto } from '../dto/out-status.dto';
@@ -26,7 +27,11 @@ import { StatusesService } from '../services/statuses.service';
 @ApiBearerAuth()
 @Controller('/api/statuses')
 export class StatusesController {
-  constructor(private readonly service: StatusesService) {}
+  constructor(
+    @Inject(CORE_CONFIG_TOKEN) private readonly coreConfig: ICoreConfig,
+    private readonly service: StatusesService
+  ) {}
+
   @Roles('isSuperuser')
   @Permissions('add_status')
   @HttpCode(HttpStatus.CREATED)
@@ -52,6 +57,7 @@ export class StatusesController {
       throw error;
     }
   }
+
   @Roles('isSuperuser')
   @Permissions('change_status')
   @HttpCode(HttpStatus.OK)
@@ -64,6 +70,9 @@ export class StatusesController {
   @ApiImplicitParam({ name: 'id', type: Number })
   @Put(':id')
   async update(@Req() req, @Param('id', new ParseIntPipe()) id, @Body() dto: InStatusDto) {
+    if (this.coreConfig.demo) {
+      throw new MethodNotAllowedException('Not allowed in DEMO mode');
+    }
     try {
       return plainToClass(
         OutStatusDto,
@@ -79,6 +88,7 @@ export class StatusesController {
       throw error;
     }
   }
+
   @Roles('isSuperuser')
   @Permissions('delete_status')
   @HttpCode(HttpStatus.NO_CONTENT)
@@ -90,6 +100,9 @@ export class StatusesController {
   @ApiImplicitParam({ name: 'id', type: Number })
   @Delete(':id')
   async delete(@Req() req, @Param('id', new ParseIntPipe()) id) {
+    if (this.coreConfig.demo) {
+      throw new MethodNotAllowedException('Not allowed in DEMO mode');
+    }
     try {
       return plainToClass(
         OutStatusDto,
@@ -104,6 +117,7 @@ export class StatusesController {
       throw error;
     }
   }
+
   @Roles('isSuperuser')
   @Permissions('read_status')
   @HttpCode(HttpStatus.OK)
@@ -130,6 +144,7 @@ export class StatusesController {
       throw error;
     }
   }
+
   @Roles('isSuperuser')
   @Permissions('read_status')
   @HttpCode(HttpStatus.OK)

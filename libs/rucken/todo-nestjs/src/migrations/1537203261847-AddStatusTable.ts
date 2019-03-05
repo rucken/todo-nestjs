@@ -46,6 +46,7 @@ export class AddStatusTable1537203261847 implements MigrationInterface {
       }),
       true
     );
+
     // create/load content type
     const ctNewEntity = await queryRunner.manager
       .getRepository<ContentType>(ContentType)
@@ -55,6 +56,7 @@ export class AddStatusTable1537203261847 implements MigrationInterface {
         name: 'user'
       }
     });
+
     // create permissions
     const readPermissions = await queryRunner.manager.getRepository<Permission>(Permission).save(
       plainToClass(Permission, [
@@ -94,6 +96,7 @@ export class AddStatusTable1537203261847 implements MigrationInterface {
         }
       ])
     );
+
     // add permissions to groups
     const gUser = await queryRunner.manager.getRepository<Group>(Group).findOneOrFail({
       where: {

@@ -5,16 +5,17 @@ import {
   Get,
   HttpCode,
   HttpStatus,
+  Inject,
+  MethodNotAllowedException,
   Param,
   ParseIntPipe,
   Post,
   Put,
   Query,
-  Req,
-  UseGuards
+  Req
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiImplicitParam, ApiImplicitQuery, ApiResponse, ApiUseTags } from '@nestjs/swagger';
-import { ParseIntWithDefaultPipe, Permissions, Roles } from '@rucken/core-nestjs';
+import { CORE_CONFIG_TOKEN, ICoreConfig, ParseIntWithDefaultPipe, Permissions, Roles } from '@rucken/core-nestjs';
 import { plainToClass } from 'class-transformer';
 import { InProjectDto } from '../dto/in-project.dto';
 import { OutProjectDto } from '../dto/out-project.dto';
@@ -26,7 +27,11 @@ import { ProjectsService } from '../services/projects.service';
 @ApiBearerAuth()
 @Controller('/api/projects')
 export class ProjectsController {
-  constructor(private readonly service: ProjectsService) {}
+  constructor(
+    @Inject(CORE_CONFIG_TOKEN) private readonly coreConfig: ICoreConfig,
+    private readonly service: ProjectsService
+  ) {}
+
   @Roles('isSuperuser')
   @Permissions('add_project')
   @HttpCode(HttpStatus.CREATED)
@@ -52,6 +57,7 @@ export class ProjectsController {
       throw error;
     }
   }
+
   @Roles('isSuperuser')
   @Permissions('change_project')
   @HttpCode(HttpStatus.OK)
@@ -64,6 +70,9 @@ export class ProjectsController {
   @ApiImplicitParam({ name: 'id', type: Number })
   @Put(':id')
   async update(@Req() req, @Param('id', new ParseIntPipe()) id, @Body() dto: InProjectDto) {
+    if (this.coreConfig.demo) {
+      throw new MethodNotAllowedException('Not allowed in DEMO mode');
+    }
     try {
       return plainToClass(
         OutProjectDto,
@@ -79,6 +88,7 @@ export class ProjectsController {
       throw error;
     }
   }
+
   @Roles('isSuperuser')
   @Permissions('delete_project')
   @HttpCode(HttpStatus.NO_CONTENT)
@@ -90,6 +100,9 @@ export class ProjectsController {
   @ApiImplicitParam({ name: 'id', type: Number })
   @Delete(':id')
   async delete(@Req() req, @Param('id', new ParseIntPipe()) id) {
+    if (this.coreConfig.demo) {
+      throw new MethodNotAllowedException('Not allowed in DEMO mode');
+    }
     try {
       return plainToClass(
         OutProjectDto,
@@ -104,6 +117,7 @@ export class ProjectsController {
       throw error;
     }
   }
+
   @HttpCode(HttpStatus.OK)
   @ApiResponse({
     status: HttpStatus.OK,
@@ -128,6 +142,7 @@ export class ProjectsController {
       throw error;
     }
   }
+
   @HttpCode(HttpStatus.OK)
   @ApiResponse({
     status: HttpStatus.OK,
