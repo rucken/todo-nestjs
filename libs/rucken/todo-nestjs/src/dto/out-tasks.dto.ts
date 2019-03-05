@@ -7,6 +7,7 @@ export class OutTasksDto {
   @Type(() => TaskDto)
   @ApiModelProperty({ type: TaskDto, isArray: true })
   tasks: TaskDto[];
+
   @Type(() => MetaDto)
   @ApiModelProperty({ type: MetaDto })
   meta: MetaDto;

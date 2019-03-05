@@ -1,6 +1,6 @@
-import { Inject, Injectable, MethodNotAllowedException, NotFoundException } from '@nestjs/common';
+import { Injectable, MethodNotAllowedException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CORE_CONFIG_TOKEN, ICoreConfig, User } from '@rucken/core-nestjs';
+import { User } from '@rucken/core-nestjs';
 import { plainToClass } from 'class-transformer';
 import { Repository } from 'typeorm';
 import { Project } from '../entities/project.entity';
@@ -10,12 +10,11 @@ import { Task } from '../entities/task.entity';
 @Injectable()
 export class ProjectsService {
   constructor(
-    @Inject(CORE_CONFIG_TOKEN) private readonly coreConfig: ICoreConfig,
     @InjectRepository(Project) private readonly repository: Repository<Project>,
-    @InjectRepository(Status)
-    private readonly statusRepository: Repository<Status>,
+    @InjectRepository(Status) private readonly statusRepository: Repository<Status>,
     @InjectRepository(Task) private readonly taskRepository: Repository<Task>
   ) {}
+
   async create(options: { item: Project }, user?: User) {
     try {
       options.item = await this.repository.save(options.item);
@@ -48,10 +47,8 @@ export class ProjectsService {
     }
     return this.findById({ id: options.item.id }, user);
   }
+
   async update(options: { id: number; item: Project }, user?: User) {
-    if (this.coreConfig.demo) {
-      throw new MethodNotAllowedException('Not allowed in DEMO mode');
-    }
     try {
       if (!(await this.checkAccess(options.id, user))) {
         throw new MethodNotAllowedException('Not allowed');
@@ -83,10 +80,8 @@ export class ProjectsService {
     }
     return this.findById({ id: options.item.id }, user);
   }
+
   async delete(options: { id: number }, user?: User) {
-    if (this.coreConfig.demo) {
-      throw new MethodNotAllowedException('Not allowed in DEMO mode');
-    }
     try {
       if (!(await this.checkAccess(options.id, user))) {
         throw new MethodNotAllowedException('Not allowed');
@@ -104,6 +99,7 @@ export class ProjectsService {
       throw error;
     }
   }
+
   private async checkAccess(id: number, user: User) {
     let data: { project: Project };
     try {
@@ -113,6 +109,7 @@ export class ProjectsService {
     }
     return data.project && data.project.users.filter(eachUser => eachUser.id === user.id).length > 0;
   }
+
   async findById(options: { id: number }, user?: User) {
     try {
       let object: Project;
@@ -146,6 +143,7 @@ export class ProjectsService {
       throw error;
     }
   }
+
   async findAll(
     options: {
       curPage: number;

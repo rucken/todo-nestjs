@@ -1,15 +1,13 @@
-import { Inject, Injectable, MethodNotAllowedException, NotFoundException } from '@nestjs/common';
+import { Injectable, MethodNotAllowedException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CORE_CONFIG_TOKEN, ICoreConfig, User } from '@rucken/core-nestjs';
+import { User } from '@rucken/core-nestjs';
 import { Repository } from 'typeorm';
 import { Task } from '../entities/task.entity';
 
 @Injectable()
 export class TasksService {
-  constructor(
-    @Inject(CORE_CONFIG_TOKEN) private readonly coreConfig: ICoreConfig,
-    @InjectRepository(Task) private readonly repository: Repository<Task>
-  ) {}
+  constructor(@InjectRepository(Task) private readonly repository: Repository<Task>) {}
+
   async create(options: { item: Task }, user?: User) {
     try {
       options.item = await this.repository.save(options.item);
@@ -18,10 +16,8 @@ export class TasksService {
       throw error;
     }
   }
+
   async update(options: { id: number; item: Task }, user?: User) {
-    if (this.coreConfig.demo) {
-      throw new MethodNotAllowedException('Not allowed in DEMO mode');
-    }
     try {
       if (!(await this.checkAccess(options.id, user))) {
         throw new MethodNotAllowedException('Not allowed');
@@ -37,10 +33,8 @@ export class TasksService {
       throw error;
     }
   }
+
   async delete(options: { id: number }, user?: User) {
-    if (this.coreConfig.demo) {
-      throw new MethodNotAllowedException('Not allowed in DEMO mode');
-    }
     try {
       if (!(await this.checkAccess(options.id, user))) {
         throw new MethodNotAllowedException('Not allowed');
@@ -56,6 +50,7 @@ export class TasksService {
       throw error;
     }
   }
+
   private async checkAccess(id: number, user: User) {
     let data: { task: Task };
     try {
@@ -67,6 +62,7 @@ export class TasksService {
       data.task && data.task.project && data.task.project.users.filter(eachUser => eachUser.id === user.id).length > 0
     );
   }
+
   async findById(options: { id: number }, user?: User) {
     try {
       let object: Task;
@@ -92,6 +88,7 @@ export class TasksService {
       throw error;
     }
   }
+
   async findAll(
     options: {
       curPage: number;

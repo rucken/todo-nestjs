@@ -7,6 +7,7 @@ export class OutProjectsDto {
   @Type(() => ProjectDto)
   @ApiModelProperty({ type: ProjectDto, isArray: true })
   projects: ProjectDto[];
+
   @Type(() => MetaDto)
   @ApiModelProperty({ type: MetaDto })
   meta: MetaDto;

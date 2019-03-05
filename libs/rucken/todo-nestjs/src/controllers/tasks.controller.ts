@@ -5,16 +5,17 @@ import {
   Get,
   HttpCode,
   HttpStatus,
+  Inject,
+  MethodNotAllowedException,
   Param,
   ParseIntPipe,
   Post,
   Put,
   Query,
-  Req,
-  UseGuards
+  Req
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiImplicitParam, ApiImplicitQuery, ApiResponse, ApiUseTags } from '@nestjs/swagger';
-import { ParseIntWithDefaultPipe, Permissions, Roles } from '@rucken/core-nestjs';
+import { CORE_CONFIG_TOKEN, ICoreConfig, ParseIntWithDefaultPipe, Permissions, Roles } from '@rucken/core-nestjs';
 import { plainToClass } from 'class-transformer';
 import { InTaskDto } from '../dto/in-task.dto';
 import { OutTaskDto } from '../dto/out-task.dto';
@@ -26,7 +27,11 @@ import { TasksService } from '../services/tasks.service';
 @ApiBearerAuth()
 @Controller('/api/tasks')
 export class TasksController {
-  constructor(private readonly service: TasksService) {}
+  constructor(
+    @Inject(CORE_CONFIG_TOKEN) private readonly coreConfig: ICoreConfig,
+    private readonly service: TasksService
+  ) {}
+
   @Roles('isSuperuser')
   @Permissions('add_task')
   @HttpCode(HttpStatus.CREATED)
@@ -52,6 +57,7 @@ export class TasksController {
       throw error;
     }
   }
+
   @Roles('isSuperuser')
   @Permissions('change_task')
   @HttpCode(HttpStatus.OK)
@@ -64,6 +70,9 @@ export class TasksController {
   @ApiImplicitParam({ name: 'id', type: Number })
   @Put(':id')
   async update(@Req() req, @Param('id', new ParseIntPipe()) id, @Body() dto: InTaskDto) {
+    if (this.coreConfig.demo) {
+      throw new MethodNotAllowedException('Not allowed in DEMO mode');
+    }
     try {
       return plainToClass(
         OutTaskDto,
@@ -79,6 +88,7 @@ export class TasksController {
       throw error;
     }
   }
+
   @Roles('isSuperuser')
   @Permissions('delete_task')
   @HttpCode(HttpStatus.NO_CONTENT)
@@ -90,6 +100,9 @@ export class TasksController {
   @ApiImplicitParam({ name: 'id', type: Number })
   @Delete(':id')
   async delete(@Req() req, @Param('id', new ParseIntPipe()) id) {
+    if (this.coreConfig.demo) {
+      throw new MethodNotAllowedException('Not allowed in DEMO mode');
+    }
     try {
       return plainToClass(
         OutTaskDto,
@@ -104,6 +117,7 @@ export class TasksController {
       throw error;
     }
   }
+
   @HttpCode(HttpStatus.OK)
   @ApiResponse({
     status: HttpStatus.OK,
@@ -128,6 +142,7 @@ export class TasksController {
       throw error;
     }
   }
+
   @HttpCode(HttpStatus.OK)
   @ApiResponse({
     status: HttpStatus.OK,
