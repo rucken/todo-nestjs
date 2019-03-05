@@ -58,6 +58,6 @@
     "class-validator": "0.9.1",
     "node-django-hashers": "1.1.6",
     "highlight.js": "9.13.1",
-    "@rucken/core-nestjs": "1.0.5"
+    "@rucken/core-nestjs": "1.0.6"
   }
 }
