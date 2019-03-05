@@ -1,3 +1,13 @@
+## [4.0.4](https://github.com/rucken/todo-nestjs/compare/4.0.3...4.0.4) (2019-03-05)
+
+
+### Bug Fixes
+
+* Move check demo mode to controllers and format sources ([ab2d17b](https://github.com/rucken/todo-nestjs/commit/ab2d17b))
+* Update dependencies ([b65f403](https://github.com/rucken/todo-nestjs/commit/b65f403))
+
+
+
 ## [4.0.3](https://github.com/rucken/todo-nestjs/compare/4.0.2...4.0.3) (2019-03-04)
 
 
