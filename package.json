@@ -144,7 +144,7 @@
     "@types/express": "4.16.1",
     "@types/jasmine": "3.3.9",
     "@types/jest": "24.0.0",
-    "@types/jsonwebtoken": "8.3.0",
+    "@types/jsonwebtoken": "8.3.1",
     "@types/node": "10.12.18",
     "@types/supertest": "2.0.7",
     "codelyzer": "4.5.0",
