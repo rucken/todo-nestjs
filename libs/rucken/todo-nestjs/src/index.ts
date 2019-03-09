@@ -34,6 +34,7 @@ export * from './migrations_entities/1552133567377/project.entity';
 export * from './migrations_entities/1552133567377/status.entity';
 export * from './migrations_entities/1552133567377/task.entity';
 export * from './services/index';
+export * from './services/projects-users.service';
 export * from './services/projects.service';
 export * from './services/statuses.service';
 export * from './services/tasks.service';

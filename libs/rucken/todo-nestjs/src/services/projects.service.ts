@@ -177,6 +177,8 @@ export class ProjectsService {
       perPage: number;
       q?: string;
       sort?: string;
+      usersIds: number[];
+      statusesNames: string[];
     },
     user?: User
   ) {
@@ -217,6 +219,16 @@ export class ProjectsService {
         });
       } else {
         qb = qb.andWhere('project.is_public = 1');
+      }
+      if (options.usersIds.length > 0) {
+        qb = qb.andWhere('(whereUser.id in (:...usersIds))', {
+          usersIds: options.usersIds
+        });
+      }
+      if (options.statusesNames.length > 0) {
+        qb = qb.andWhere('(status.name in (:...statusesIds))', {
+          statusesIds: options.statusesNames
+        });
       }
       options.sort = options.sort && new Project().hasOwnProperty(options.sort.replace('-', '')) ? options.sort : '-id';
       let field = options.sort.replace('-', '');
