@@ -1,5 +1,4 @@
-import { CustomValidationError, User } from '@rucken/core-nestjs';
-import { Type } from 'class-transformer';
+import { CustomValidationError, User1524199022084 } from '@rucken/core-nestjs';
 import { IsNotEmpty, IsOptional, MaxLength, validateSync } from 'class-validator';
 import {
   BeforeInsert,
@@ -7,16 +6,17 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  ManyToOne,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from 'typeorm';
-import { Project } from './project.entity';
-import { Status } from './status.entity';
+import { Status1538225369404 } from './status.entity';
+import { Task1538225369404 } from './task.entity';
 
-@Entity({ name: 'tasks' })
-export class Task {
+@Entity({ name: 'projects' })
+export class Project1538225369404 {
   @PrimaryGeneratedColumn()
   id: number = undefined;
 
@@ -30,11 +30,8 @@ export class Task {
   @IsOptional()
   description: string = undefined;
 
-  @Column({ type: Date, name: 'open_at', nullable: true })
-  openAt: Date = undefined;
-
-  @Column({ type: Date, name: 'close_at', nullable: true })
-  closeAt: Date = undefined;
+  @Column({ name: 'is_public', default: false })
+  isPublic: boolean = undefined;
 
   @CreateDateColumn({ name: 'created_at', nullable: true })
   createdAt: Date = undefined;
@@ -42,26 +39,27 @@ export class Task {
   @UpdateDateColumn({ name: 'updated_at', nullable: true })
   updatedAt: Date = undefined;
 
-  @Type(() => Project)
-  @IsNotEmpty()
-  @ManyToOne(type => Project, { eager: true, nullable: true })
-  @JoinColumn({ name: 'project_id' })
-  project: Project = undefined;
+  @OneToMany(type => Status1538225369404, status => status.project)
+  statuses: Status1538225369404[];
 
-  @Type(() => Status)
-  @ManyToOne(type => Status, { eager: true, nullable: true })
-  @JoinColumn({ name: 'status_id' })
-  status: Status = undefined;
+  @OneToMany(type => Task1538225369404, task => task.project)
+  tasks: Task1538225369404[];
 
-  @Type(() => User)
-  @ManyToOne(type => User, { eager: true, nullable: true })
-  @JoinColumn({ name: 'created_user_id' })
-  createdUser: User = undefined;
-
-  @Type(() => User)
-  @ManyToOne(type => User, { eager: true, nullable: true })
-  @JoinColumn({ name: 'updated_user_id' })
-  updatedUser: User = undefined;
+  @ManyToMany(type => User1524199022084, {
+    cascade: true
+  })
+  @JoinTable({
+    name: 'user_projects',
+    joinColumn: {
+      name: 'project_id',
+      referencedColumnName: 'id'
+    },
+    inverseJoinColumn: {
+      name: 'user_id',
+      referencedColumnName: 'id'
+    }
+  })
+  users: User1524199022084[];
 
   @BeforeInsert()
   doBeforeInsertion() {

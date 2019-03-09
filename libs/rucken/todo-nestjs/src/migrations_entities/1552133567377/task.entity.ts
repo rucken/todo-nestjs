@@ -1,22 +1,12 @@
-import { CustomValidationError, User } from '@rucken/core-nestjs';
+import { CustomValidationError, User1524199022084 } from '@rucken/core-nestjs';
 import { Type } from 'class-transformer';
 import { IsNotEmpty, IsOptional, MaxLength, validateSync } from 'class-validator';
-import {
-  BeforeInsert,
-  BeforeUpdate,
-  Column,
-  CreateDateColumn,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn
-} from 'typeorm';
-import { Project } from './project.entity';
-import { Status } from './status.entity';
+import { BeforeInsert, BeforeUpdate, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Project1552133567377 } from './project.entity';
+import { Status1552133567377 } from './status.entity';
 
 @Entity({ name: 'tasks' })
-export class Task {
+export class Task1552133567377 {
   @PrimaryGeneratedColumn()
   id: number = undefined;
 
@@ -42,26 +32,26 @@ export class Task {
   @UpdateDateColumn({ name: 'updated_at', nullable: true })
   updatedAt: Date = undefined;
 
-  @Type(() => Project)
+  @Type(() => Project1552133567377)
   @IsNotEmpty()
-  @ManyToOne(type => Project, { eager: true, nullable: true })
+  @ManyToOne(type => Project1552133567377, { eager: true, nullable: true })
   @JoinColumn({ name: 'project_id' })
-  project: Project = undefined;
+  project: Project1552133567377 = undefined;
 
-  @Type(() => Status)
-  @ManyToOne(type => Status, { eager: true, nullable: true })
+  @Type(() => Status1552133567377)
+  @ManyToOne(type => Status1552133567377, { eager: true, nullable: true })
   @JoinColumn({ name: 'status_id' })
-  status: Status = undefined;
+  status: Status1552133567377 = undefined;
 
-  @Type(() => User)
-  @ManyToOne(type => User, { eager: true, nullable: true })
+  @Type(() => User1524199022084)
+  @ManyToOne(type => User1524199022084, { eager: true, nullable: true })
   @JoinColumn({ name: 'created_user_id' })
-  createdUser: User = undefined;
+  createdUser: User1524199022084 = undefined;
 
-  @Type(() => User)
-  @ManyToOne(type => User, { eager: true, nullable: true })
+  @Type(() => User1524199022084)
+  @ManyToOne(type => User1524199022084, { eager: true, nullable: true })
   @JoinColumn({ name: 'updated_user_id' })
-  updatedUser: User = undefined;
+  updatedUser: User1524199022084 = undefined;
 
   @BeforeInsert()
   doBeforeInsertion() {

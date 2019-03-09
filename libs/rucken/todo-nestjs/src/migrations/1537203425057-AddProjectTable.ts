@@ -1,4 +1,4 @@
-import { ContentType, Group, Permission } from '@rucken/core-nestjs';
+import { ContentType1524199022084, Group1524199022084, Permission1524199022084 } from '@rucken/core-nestjs';
 import { plainToClass } from 'class-transformer';
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
@@ -7,7 +7,7 @@ export class AddProjectTable1537203425057 implements MigrationInterface {
     // create table
     await queryRunner.createTable(
       new Table({
-        name: 'project',
+        name: 'projects',
         columns: [
           {
             name: 'id',
@@ -49,62 +49,68 @@ export class AddProjectTable1537203425057 implements MigrationInterface {
 
     // create/load content type
     const ctNewEntity = await queryRunner.manager
-      .getRepository<ContentType>(ContentType)
-      .save(plainToClass(ContentType, { name: 'project', title: 'Project' }));
-    const ctUser = await queryRunner.manager.getRepository<ContentType>(ContentType).findOneOrFail({
-      where: {
-        name: 'user'
-      }
-    });
+      .getRepository<ContentType1524199022084>(ContentType1524199022084)
+      .save(plainToClass(ContentType1524199022084, { name: 'project', title: 'Project' }));
+    const ctUser = await queryRunner.manager
+      .getRepository<ContentType1524199022084>(ContentType1524199022084)
+      .findOneOrFail({
+        where: {
+          name: 'user'
+        }
+      });
 
     // create permissions
-    const readPermissions = await queryRunner.manager.getRepository<Permission>(Permission).save(
-      plainToClass(Permission, [
-        {
-          title: 'Can read project',
-          name: 'read_project',
-          contentType: ctNewEntity
-        },
-        {
-          title: 'Can read projects frame',
-          name: 'read_projects-frame',
-          contentType: ctUser
-        },
-        {
-          title: 'Can read projects page',
-          name: 'read_projects-page',
-          contentType: ctUser
-        }
-      ])
-    );
-    const modifiPermissions = await queryRunner.manager.getRepository<Permission>(Permission).save(
-      plainToClass(Permission, [
-        {
-          title: 'Can add project',
-          name: 'add_project',
-          contentType: ctNewEntity
-        },
-        {
-          title: 'Can change project',
-          name: 'change_project',
-          contentType: ctNewEntity
-        },
-        {
-          title: 'Can delete project',
-          name: 'delete_project',
-          contentType: ctNewEntity
-        }
-      ])
-    );
+    const readPermissions = await queryRunner.manager
+      .getRepository<Permission1524199022084>(Permission1524199022084)
+      .save(
+        plainToClass(Permission1524199022084, [
+          {
+            title: 'Can read project',
+            name: 'read_project',
+            contentType: ctNewEntity
+          },
+          {
+            title: 'Can read projects frame',
+            name: 'read_projects-frame',
+            contentType: ctUser
+          },
+          {
+            title: 'Can read projects page',
+            name: 'read_projects-page',
+            contentType: ctUser
+          }
+        ])
+      );
+    const modifiPermissions = await queryRunner.manager
+      .getRepository<Permission1524199022084>(Permission1524199022084)
+      .save(
+        plainToClass(Permission1524199022084, [
+          {
+            title: 'Can add project',
+            name: 'add_project',
+            contentType: ctNewEntity
+          },
+          {
+            title: 'Can change project',
+            name: 'change_project',
+            contentType: ctNewEntity
+          },
+          {
+            title: 'Can delete project',
+            name: 'delete_project',
+            contentType: ctNewEntity
+          }
+        ])
+      );
 
     // add permissions to groups
-    const gUser = await queryRunner.manager.getRepository<Group>(Group).findOneOrFail({
+    const gUser = await queryRunner.manager.getRepository<Group1524199022084>(Group1524199022084).findOneOrFail({
       where: {
         name: 'user'
       },
       relations: ['permissions']
     });
-    const gAdmin = await queryRunner.manager.getRepository<Group>(Group).findOneOrFail({
+    const gAdmin = await queryRunner.manager.getRepository<Group1524199022084>(Group1524199022084).findOneOrFail({
       where: {
         name: 'admin'
       },
@@ -112,7 +118,7 @@ export class AddProjectTable1537203425057 implements MigrationInterface {
     });
     gUser.permissions = [...gUser.permissions, ...readPermissions, ...modifiPermissions];
     gAdmin.permissions = [...gAdmin.permissions, ...readPermissions, ...modifiPermissions];
-    await queryRunner.manager.getRepository<Group>(Group).save([gUser, gAdmin]);
+    await queryRunner.manager.getRepository<Group1524199022084>(Group1524199022084).save([gUser, gAdmin]);
   }
 
   public async down(queryRunner: QueryRunner): Promise<any> {}

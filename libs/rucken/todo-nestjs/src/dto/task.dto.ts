@@ -3,6 +3,7 @@ import { Type } from 'class-transformer';
 import { IsNotEmpty, MaxLength } from 'class-validator';
 import { ProjectDto } from './project.dto';
 import { StatusDto } from './status.dto';
+import { UserDto } from '@rucken/core-nestjs';
 
 export class TaskDto {
   @ApiModelProperty({ type: Number })
@@ -32,4 +33,14 @@ export class TaskDto {
   @IsNotEmpty()
   @ApiModelProperty({ type: StatusDto })
   status: StatusDto;
+
+  @Type(() => UserDto)
+  @IsNotEmpty()
+  @ApiModelProperty({ type: UserDto })
+  createdUser: UserDto;
+
+  @Type(() => UserDto)
+  @IsNotEmpty()
+  @ApiModelProperty({ type: UserDto })
+  updatedUser: UserDto;
 }

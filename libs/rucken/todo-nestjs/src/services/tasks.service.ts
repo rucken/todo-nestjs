@@ -6,9 +6,10 @@ import { Task } from '../entities/task.entity';
 
 @Injectable()
 export class TasksService {
-  constructor(@InjectRepository(Task) private readonly repository: Repository<Task>) {}
+  constructor(@InjectRepository(Task) private readonly repository: Repository<Task>) { }
 
   async create(options: { item: Task }, user?: User) {
+    options.item.createdUser = user;
     try {
       options.item = await this.repository.save(options.item);
       return { task: options.item };
@@ -26,6 +27,7 @@ export class TasksService {
       throw error;
     }
     options.item.id = options.id;
+    options.item.updatedUser = user;
     try {
       options.item = await this.repository.save(options.item);
       return { task: options.item };
@@ -70,6 +72,8 @@ export class TasksService {
       qb = qb.leftJoinAndSelect('task.project', 'project');
       qb = qb.leftJoinAndSelect('task.status', 'status');
       qb = qb.leftJoinAndSelect('project.users', 'user');
+      qb = qb.leftJoinAndSelect('task.createdUser', 'createdUser');
+      qb = qb.leftJoinAndSelect('task.updatedUser', 'updatedUser');
       qb = qb.leftJoin('project.users', 'whereUser');
       qb = qb.andWhere('task.id = :id', { id: +options.id });
       if (user) {
@@ -105,6 +109,8 @@ export class TasksService {
       qb = qb.leftJoinAndSelect('task.project', 'project');
       qb = qb.leftJoinAndSelect('task.status', 'status');
       qb = qb.leftJoinAndSelect('project.users', 'user');
+      qb = qb.leftJoinAndSelect('task.createdUser', 'createdUser');
+      qb = qb.leftJoinAndSelect('task.updatedUser', 'updatedUser');
       qb = qb.leftJoin('project.users', 'whereUser');
       if (options.q) {
         qb = qb.andWhere('(task.title like :q or task.description like :q or task.id = :id)', {

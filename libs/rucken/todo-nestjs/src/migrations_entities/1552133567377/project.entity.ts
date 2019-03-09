@@ -1,12 +1,12 @@
-import { CustomValidationError, User } from '@rucken/core-nestjs';
+import { CustomValidationError, User1524199022084 } from '@rucken/core-nestjs';
 import { Type } from 'class-transformer';
 import { IsNotEmpty, IsOptional, MaxLength, validateSync } from 'class-validator';
 import { BeforeInsert, BeforeUpdate, Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
-import { Status } from './status.entity';
-import { Task } from './task.entity';
+import { Status1552133567377 } from './status.entity';
+import { Task1552133567377 } from './task.entity';
 
 @Entity({ name: 'projects' })
-export class Project {
+export class Project1552133567377 {
   @PrimaryGeneratedColumn()
   id: number = undefined;
 
@@ -29,13 +29,13 @@ export class Project {
   @UpdateDateColumn({ name: 'updated_at', nullable: true })
   updatedAt: Date = undefined;
 
-  @OneToMany(type => Status, status => status.project)
-  statuses: Status[];
+  @OneToMany(type => Status1552133567377, status => status.project)
+  statuses: Status1552133567377[];
 
-  @OneToMany(type => Task, task => task.project)
-  tasks: Task[];
+  @OneToMany(type => Task1552133567377, task => task.project)
+  tasks: Task1552133567377[];
 
-  @ManyToMany(type => User, {
+  @ManyToMany(type => User1524199022084, {
     cascade: true
   })
   @JoinTable({
@@ -49,17 +49,17 @@ export class Project {
       referencedColumnName: 'id'
     }
   })
-  users: User[];
+  users: User1524199022084[];
 
-  @Type(() => User)
-  @ManyToOne(type => User, { eager: true, nullable: true })
+  @Type(() => User1524199022084)
+  @ManyToOne(type => User1524199022084, { eager: true, nullable: true })
   @JoinColumn({ name: 'created_user_id' })
-  createdUser: User = undefined;
+  createdUser: User1524199022084 = undefined;
 
-  @Type(() => User)
-  @ManyToOne(type => User, { eager: true, nullable: true })
+  @Type(() => User1524199022084)
+  @ManyToOne(type => User1524199022084, { eager: true, nullable: true })
   @JoinColumn({ name: 'updated_user_id' })
-  updatedUser: User = undefined;
+  updatedUser: User1524199022084 = undefined;
 
   @Column({
     name: 'tasksCount',

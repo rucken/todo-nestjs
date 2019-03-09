@@ -1,4 +1,4 @@
-import { CustomValidationError, User } from '@rucken/core-nestjs';
+import { CustomValidationError } from '@rucken/core-nestjs';
 import { Type } from 'class-transformer';
 import { IsNotEmpty, IsOptional, MaxLength, validateSync } from 'class-validator';
 import {
@@ -12,11 +12,11 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from 'typeorm';
-import { Project } from './project.entity';
-import { Status } from './status.entity';
+import { Project1538225369404 } from './project.entity';
+import { Status1538225369404 } from './status.entity';
 
 @Entity({ name: 'tasks' })
-export class Task {
+export class Task1538225369404 {
   @PrimaryGeneratedColumn()
   id: number = undefined;
 
@@ -42,26 +42,16 @@ export class Task {
   @UpdateDateColumn({ name: 'updated_at', nullable: true })
   updatedAt: Date = undefined;
 
-  @Type(() => Project)
+  @Type(() => Project1538225369404)
   @IsNotEmpty()
-  @ManyToOne(type => Project, { eager: true, nullable: true })
+  @ManyToOne(type => Project1538225369404, { eager: true, nullable: true })
   @JoinColumn({ name: 'project_id' })
-  project: Project = undefined;
+  project: Project1538225369404 = undefined;
 
-  @Type(() => Status)
-  @ManyToOne(type => Status, { eager: true, nullable: true })
+  @Type(() => Status1538225369404)
+  @ManyToOne(type => Status1538225369404, { eager: true, nullable: true })
   @JoinColumn({ name: 'status_id' })
-  status: Status = undefined;
-
-  @Type(() => User)
-  @ManyToOne(type => User, { eager: true, nullable: true })
-  @JoinColumn({ name: 'created_user_id' })
-  createdUser: User = undefined;
-
-  @Type(() => User)
-  @ManyToOne(type => User, { eager: true, nullable: true })
-  @JoinColumn({ name: 'updated_user_id' })
-  updatedUser: User = undefined;
+  status: Status1538225369404 = undefined;
 
   @BeforeInsert()
   doBeforeInsertion() {

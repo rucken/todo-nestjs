@@ -13,7 +13,7 @@ export class ProjectsService {
     @InjectRepository(Project) private readonly repository: Repository<Project>,
     @InjectRepository(Status) private readonly statusRepository: Repository<Status>,
     @InjectRepository(Task) private readonly taskRepository: Repository<Task>
-  ) {}
+  ) { }
 
   async create(options: { item: Project }, user?: User) {
     try {
@@ -40,6 +40,7 @@ export class ProjectsService {
     } catch (error) {
       throw error;
     }
+    options.item.createdUser = user;
     try {
       options.item = await this.repository.save(options.item);
     } catch (error) {
@@ -73,6 +74,7 @@ export class ProjectsService {
     } catch (error) {
       throw error;
     }
+    options.item.updatedUser = user;
     try {
       options.item = await this.repository.save(options.item);
     } catch (error) {
@@ -120,6 +122,23 @@ export class ProjectsService {
       qb = qb.leftJoinAndSelect('group.permissions', 'permission');
       qb = qb.leftJoinAndSelect('permission.contentType', 'contentType');
       qb = qb.leftJoinAndSelect('project.statuses', 'status');
+      qb = qb.leftJoinAndSelect('project.createdUser', 'createdUser');
+      qb = qb.leftJoinAndSelect('project.updatedUser', 'updatedUser');
+      qb = qb.addSelect(subQuery => {
+        return subQuery
+          .select("COUNT(task.id)", "tasksCount")
+          .from("tasks", "task")
+          .where('project.id=task.project_id')
+          .limit(1);
+      }, "tasksCount");
+      qb = qb.addSelect(subQuery => {
+        return subQuery
+          .select("COUNT(task.id)", "completedTasksCount")
+          .from("tasks", "task")
+          .where('project.id=task.project_id and task.openAt is not null')
+          .limit(1);
+      }, "completedTasksCount");
+
       qb = qb.andWhere('project.id = :id', {
         id: +options.id
       });
@@ -132,7 +151,15 @@ export class ProjectsService {
           id: options.id
         });
       }
-      object = await qb.getOne();
+
+      // object = await qb.getOne();
+      const raws = await qb.getRawAndEntities();
+      object = raws.entities.map((entity, index) => {
+        entity.tasksCount = raws.raw[index].tasksCount;
+        entity.completedTasksCount = raws.raw[index].completedTasksCount;
+        return entity;
+      })[0];
+
       if (!object) {
         throw new NotFoundException();
       }
@@ -154,7 +181,6 @@ export class ProjectsService {
     user?: User
   ) {
     try {
-      let objects: [Project[], number];
       let qb = this.repository.createQueryBuilder('project');
       qb = qb.leftJoinAndSelect('project.users', 'user');
       qb = qb.leftJoin('project.users', 'whereUser');
@@ -162,6 +188,23 @@ export class ProjectsService {
       qb = qb.leftJoinAndSelect('group.permissions', 'permission');
       qb = qb.leftJoinAndSelect('permission.contentType', 'contentType');
       qb = qb.leftJoinAndSelect('project.statuses', 'status');
+      qb = qb.leftJoinAndSelect('project.createdUser', 'createdUser');
+      qb = qb.leftJoinAndSelect('project.updatedUser', 'updatedUser');
+      qb = qb.addSelect(subQuery => {
+        return subQuery
+          .select("COUNT(task.id)", "tasksCount")
+          .from("tasks", "task")
+          .where('project.id=task.project_id')
+          .limit(1);
+      }, "tasksCount");
+      qb = qb.addSelect(subQuery => {
+        return subQuery
+          .select("COUNT(task.id)", "completedTasksCount")
+          .from("tasks", "task")
+          .where('project.id=task.project_id and task.openAt is not null')
+          .limit(1);
+      }, "completedTasksCount");
+
       if (options.q) {
         qb = qb.andWhere('(project.title like :q or project.description like :q or project.id = :id)', {
           q: `%${options.q}%`,
@@ -176,22 +219,34 @@ export class ProjectsService {
         qb = qb.andWhere('project.is_public = 1');
       }
       options.sort = options.sort && new Project().hasOwnProperty(options.sort.replace('-', '')) ? options.sort : '-id';
-      const field = options.sort.replace('-', '');
+      let field = options.sort.replace('-', '');
+      if (['tasksCount', 'completedTasksCount'].indexOf(field) === -1) {
+        field = 'project.' + field;
+      }
       if (options.sort) {
         if (options.sort[0] === '-') {
-          qb = qb.orderBy('project.' + field, 'DESC');
+          qb = qb.orderBy(field, 'DESC');
         } else {
-          qb = qb.orderBy('project.' + field, 'ASC');
+          qb = qb.orderBy(field, 'ASC');
         }
       }
       qb = qb.skip((options.curPage - 1) * options.perPage).take(options.perPage);
-      objects = await qb.getManyAndCount();
+
+      // objects = await qb.getManyAndCount();
+      const raws = await qb.getRawAndEntities();
+      const entities = raws.entities.map((entity, index) => {
+        entity.tasksCount = raws.raw[index].tasksCount;
+        entity.completedTasksCount = raws.raw[index].completedTasksCount;
+        return entity;
+      });
+      const count = await qb.getCount();
+
       return {
-        projects: objects[0],
+        projects: entities,
         meta: {
           perPage: options.perPage,
-          totalPages: options.perPage > objects[1] ? 1 : Math.ceil(objects[1] / options.perPage),
-          totalResults: objects[1],
+          totalPages: options.perPage > count ? 1 : Math.ceil(count / options.perPage),
+          totalResults: count,
           curPage: options.curPage
         }
       };
