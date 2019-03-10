@@ -110,5 +110,5 @@ export class FillData1538225369404 implements MigrationInterface {
     );
   }
 
-  public async down(queryRunner: QueryRunner): Promise<any> { }
+  public async down(queryRunner: QueryRunner): Promise<any> {}
 }

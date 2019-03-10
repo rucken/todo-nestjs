@@ -6,7 +6,7 @@ import { Status } from '../entities/status.entity';
 
 @Injectable()
 export class StatusesService {
-  constructor(@InjectRepository(Status) private readonly repository: Repository<Status>) { }
+  constructor(@InjectRepository(Status) private readonly repository: Repository<Status>) {}
 
   async create(options: { item: Status }, user?: User) {
     try {

@@ -1,3 +1,18 @@
+# [4.1.0](https://github.com/rucken/todo-nestjs/compare/4.0.4...4.1.0) (2019-03-10)
+
+
+### Bug Fixes
+
+* Add isolated entities for migrations ([798aec0](https://github.com/rucken/todo-nestjs/commit/798aec0))
+
+
+### Features
+
+* Add asignedUser to tasks and remove noused relations on requests ([86378ec](https://github.com/rucken/todo-nestjs/commit/86378ec))
+* Add filter projects with usersIds and statusesNames, add get users and statuses in projects ([61fb300](https://github.com/rucken/todo-nestjs/commit/61fb300))
+
+
+
 ## [4.0.4](https://github.com/rucken/todo-nestjs/compare/4.0.3...4.0.4) (2019-03-05)
 
 

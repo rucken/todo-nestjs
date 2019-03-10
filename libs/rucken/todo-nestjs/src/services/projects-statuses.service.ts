@@ -6,7 +6,7 @@ import { Status } from '../entities/status.entity';
 
 @Injectable()
 export class ProjectsStatusesService {
-  constructor(@InjectRepository(Status) private readonly repository: Repository<Status>) { }
+  constructor(@InjectRepository(Status) private readonly repository: Repository<Status>) {}
 
   async findAll(
     options: {
@@ -14,7 +14,7 @@ export class ProjectsStatusesService {
       perPage: number;
       q?: string;
       sort?: string;
-      projectsIds: number[]
+      projectsIds: number[];
     },
     user?: User
   ) {
