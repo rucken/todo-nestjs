@@ -1,7 +1,20 @@
 import { CustomValidationError, User } from '@rucken/core-nestjs';
 import { Type } from 'class-transformer';
 import { IsNotEmpty, IsOptional, MaxLength, validateSync } from 'class-validator';
-import { BeforeInsert, BeforeUpdate, Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import {
+  BeforeInsert,
+  BeforeUpdate,
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
+} from 'typeorm';
 import { Status } from './status.entity';
 import { Task } from './task.entity';
 

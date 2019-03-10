@@ -5,10 +5,7 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class ProjectsUsersService {
-
-  constructor(
-    @InjectRepository(User) private readonly userRepository: Repository<User>
-  ) { }
+  constructor(@InjectRepository(User) private readonly userRepository: Repository<User>) {}
 
   async findAll(
     options: {
@@ -16,7 +13,7 @@ export class ProjectsUsersService {
       perPage: number;
       q?: string;
       sort?: string;
-      projectsIds: number[]
+      projectsIds: number[];
     },
     user?: User
   ) {

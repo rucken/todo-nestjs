@@ -6,7 +6,7 @@ import { Task } from '../entities/task.entity';
 
 @Injectable()
 export class TasksService {
-  constructor(@InjectRepository(Task) private readonly repository: Repository<Task>) { }
+  constructor(@InjectRepository(Task) private readonly repository: Repository<Task>) {}
 
   async create(options: { item: Task }, user?: User) {
     options.item.createdUser = user;

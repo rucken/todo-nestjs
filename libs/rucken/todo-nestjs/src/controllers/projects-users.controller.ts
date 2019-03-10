@@ -8,9 +8,7 @@ import { ProjectsUsersService } from '../services/projects-users.service';
 @ApiBearerAuth()
 @Controller('/api/projects')
 export class ProjectsUsersController {
-  constructor(
-    private readonly service: ProjectsUsersService
-  ) { }
+  constructor(private readonly service: ProjectsUsersService) {}
 
   @HttpCode(HttpStatus.OK)
   @ApiResponse({
@@ -67,7 +65,12 @@ export class ProjectsUsersController {
             perPage,
             q,
             sort,
-            projectsIds: projectsIds ? projectsIds.split(',').filter(id => !isNaN(+id)).map(id => +id) : []
+            projectsIds: projectsIds
+              ? projectsIds
+                  .split(',')
+                  .filter(id => !isNaN(+id))
+                  .map(id => +id)
+              : []
           },
           req.user
         )

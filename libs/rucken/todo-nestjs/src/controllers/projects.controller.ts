@@ -1,4 +1,19 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Inject, MethodNotAllowedException, Param, ParseIntPipe, Post, Put, Query, Req } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Inject,
+  MethodNotAllowedException,
+  Param,
+  ParseIntPipe,
+  Post,
+  Put,
+  Query,
+  Req
+} from '@nestjs/common';
 import { ApiBearerAuth, ApiImplicitParam, ApiImplicitQuery, ApiResponse, ApiUseTags } from '@nestjs/swagger';
 import { CORE_CONFIG_TOKEN, ICoreConfig, ParseIntWithDefaultPipe, Permissions, Roles } from '@rucken/core-nestjs';
 import { plainToClass } from 'class-transformer';
@@ -15,7 +30,7 @@ export class ProjectsController {
   constructor(
     @Inject(CORE_CONFIG_TOKEN) private readonly coreConfig: ICoreConfig,
     private readonly service: ProjectsService
-  ) { }
+  ) {}
 
   @Roles('isSuperuser')
   @Permissions('add_project')
@@ -190,7 +205,12 @@ export class ProjectsController {
             perPage,
             q,
             sort,
-            usersIds: usersIds ? usersIds.split(',').filter(id => !isNaN(+id)).map(id => +id) : [],
+            usersIds: usersIds
+              ? usersIds
+                  .split(',')
+                  .filter(id => !isNaN(+id))
+                  .map(id => +id)
+              : [],
             statusesNames: statusesNames ? statusesNames.split(',').map(name => name.trim()) : []
           },
           req.user

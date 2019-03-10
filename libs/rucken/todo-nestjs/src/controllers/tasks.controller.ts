@@ -30,7 +30,7 @@ export class TasksController {
   constructor(
     @Inject(CORE_CONFIG_TOKEN) private readonly coreConfig: ICoreConfig,
     private readonly service: TasksService
-  ) { }
+  ) {}
 
   @Roles('isSuperuser')
   @Permissions('add_task')
@@ -201,7 +201,12 @@ export class TasksController {
             q,
             sort,
             project,
-            usersIds: usersIds ? usersIds.split(',').filter(id => !isNaN(+id)).map(id => +id) : [],
+            usersIds: usersIds
+              ? usersIds
+                  .split(',')
+                  .filter(id => !isNaN(+id))
+                  .map(id => +id)
+              : [],
             statusesNames: statusesNames ? statusesNames.split(',').map(name => name.trim()) : []
           },
           req.user

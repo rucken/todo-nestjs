@@ -13,7 +13,7 @@ export class ProjectsService {
     @InjectRepository(Project) private readonly repository: Repository<Project>,
     @InjectRepository(Status) private readonly statusRepository: Repository<Status>,
     @InjectRepository(Task) private readonly taskRepository: Repository<Task>
-  ) { }
+  ) {}
 
   async create(options: { item: Project }, user?: User) {
     try {
@@ -123,18 +123,18 @@ export class ProjectsService {
       qb = qb.leftJoinAndSelect('project.updatedUser', 'updatedUser');
       qb = qb.addSelect(subQuery => {
         return subQuery
-          .select("COUNT(task.id)", "tasksCount")
-          .from("tasks", "task")
+          .select('COUNT(task.id)', 'tasksCount')
+          .from('tasks', 'task')
           .where('project.id=task.project_id')
           .limit(1);
-      }, "tasksCount");
+      }, 'tasksCount');
       qb = qb.addSelect(subQuery => {
         return subQuery
-          .select("COUNT(task.id)", "completedTasksCount")
-          .from("tasks", "task")
+          .select('COUNT(task.id)', 'completedTasksCount')
+          .from('tasks', 'task')
           .where('project.id=task.project_id and task.openAt is not null')
           .limit(1);
-      }, "completedTasksCount");
+      }, 'completedTasksCount');
 
       qb = qb.andWhere('project.id = :id', {
         id: +options.id
@@ -188,18 +188,18 @@ export class ProjectsService {
       qb = qb.leftJoinAndSelect('project.updatedUser', 'updatedUser');
       qb = qb.addSelect(subQuery => {
         return subQuery
-          .select("COUNT(task.id)", "tasksCount")
-          .from("tasks", "task")
+          .select('COUNT(task.id)', 'tasksCount')
+          .from('tasks', 'task')
           .where('project.id=task.project_id')
           .limit(1);
-      }, "tasksCount");
+      }, 'tasksCount');
       qb = qb.addSelect(subQuery => {
         return subQuery
-          .select("COUNT(task.id)", "completedTasksCount")
-          .from("tasks", "task")
+          .select('COUNT(task.id)', 'completedTasksCount')
+          .from('tasks', 'task')
           .where('project.id=task.project_id and task.openAt is not null')
           .limit(1);
-      }, "completedTasksCount");
+      }, 'completedTasksCount');
 
       if (options.q) {
         qb = qb.andWhere('(project.title like :q or project.description like :q or project.id = :id)', {

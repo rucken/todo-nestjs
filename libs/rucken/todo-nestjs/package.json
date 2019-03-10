@@ -1,6 +1,6 @@
 {
   "name": "@rucken/todo-nestjs",
-  "version": "4.0.4",
+  "version": "4.1.0",
   "engines": {
     "node": ">=11",
     "npm": ">=6.5.0"
