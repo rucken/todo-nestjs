@@ -1,4 +1,5 @@
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
+import { UserDto } from '@rucken/core-nestjs';
 import { Type } from 'class-transformer';
 import { IsNotEmpty, MaxLength } from 'class-validator';
 import { ProjectDto } from './project.dto';
@@ -29,7 +30,18 @@ export class TaskDto {
   project: ProjectDto;
 
   @Type(() => StatusDto)
-  @IsNotEmpty()
   @ApiModelProperty({ type: StatusDto })
   status: StatusDto;
+
+  @Type(() => UserDto)
+  @ApiModelProperty({ type: UserDto })
+  createdUser: UserDto;
+
+  @Type(() => UserDto)
+  @ApiModelProperty({ type: UserDto })
+  updatedUser: UserDto;
+
+  @Type(() => UserDto)
+  @ApiModelProperty({ type: UserDto })
+  assignedUser: UserDto;
 }

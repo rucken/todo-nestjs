@@ -174,13 +174,27 @@ export class ProjectsController {
     type: Number,
     description: 'A page number within the paginated result set. (default: 1)'
   })
+  @ApiImplicitQuery({
+    name: 'users',
+    required: false,
+    isArray: true,
+    description: 'Users assigned to projects. (default: [])'
+  })
+  @ApiImplicitQuery({
+    name: 'statuses',
+    required: false,
+    isArray: true,
+    description: 'Projects statuses. (default: [])'
+  })
   @Get()
   async findAll(
     @Req() req,
     @Query('cur_page', new ParseIntWithDefaultPipe(1)) curPage,
     @Query('per_page', new ParseIntWithDefaultPipe(10)) perPage,
     @Query('q') q,
-    @Query('sort') sort
+    @Query('sort') sort,
+    @Query('users') usersIds,
+    @Query('statuses') statusesNames
   ) {
     try {
       return plainToClass(
@@ -190,7 +204,14 @@ export class ProjectsController {
             curPage,
             perPage,
             q,
-            sort
+            sort,
+            usersIds: usersIds
+              ? usersIds
+                  .split(',')
+                  .filter(id => !isNaN(+id))
+                  .map(id => +id)
+              : [],
+            statusesNames: statusesNames ? statusesNames.split(',').map(name => name.trim()) : []
           },
           req.user
         )

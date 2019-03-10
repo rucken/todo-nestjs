@@ -12,10 +12,10 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from 'typeorm';
-import { Project } from './project.entity';
+import { Project1538225369404 } from './project.entity';
 
 @Entity({ name: 'statuses' })
-export class Status {
+export class Status1538225369404 {
   @PrimaryGeneratedColumn()
   id: number = undefined;
 
@@ -29,10 +29,10 @@ export class Status {
   @MaxLength(255)
   title: string = undefined;
 
-  @Type(() => Project)
-  @ManyToOne(type => Project, { eager: true, nullable: true })
+  @Type(() => Project1538225369404)
+  @ManyToOne(type => Project1538225369404, { eager: true, nullable: true })
   @JoinColumn({ name: 'project_id' })
-  project: Project = undefined;
+  project: Project1538225369404 = undefined;
 
   @CreateDateColumn({ name: 'created_at', nullable: true })
   createdAt: Date = undefined;

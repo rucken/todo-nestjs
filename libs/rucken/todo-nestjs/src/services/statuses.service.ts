@@ -53,7 +53,7 @@ export class StatusesService {
   private async checkAccess(id: number, user: User) {
     let data: { status: Status };
     try {
-      data = await this.findById({ id }, user);
+      data = await this.findById({ id }, user, true);
     } catch (error) {
       throw error;
     }
@@ -64,12 +64,14 @@ export class StatusesService {
     );
   }
 
-  async findById(options: { id: number }, user?: User) {
+  async findById(options: { id: number }, user?: User, includeProjectUsers?: boolean) {
     try {
       let object: Status;
       let qb = this.repository.createQueryBuilder('status');
       qb = qb.leftJoinAndSelect('status.project', 'project');
-      qb = qb.leftJoinAndSelect('project.users', 'user');
+      if (includeProjectUsers) {
+        qb = qb.leftJoinAndSelect('project.users', 'user');
+      }
       qb = qb.leftJoin('project.users', 'whereUser');
       qb = qb.andWhere('status.id = :id', {
         id: +options.id
@@ -105,7 +107,6 @@ export class StatusesService {
       let objects: [Status[], number];
       let qb = this.repository.createQueryBuilder('status');
       qb = qb.leftJoinAndSelect('status.project', 'project');
-      qb = qb.leftJoin('project.users', 'user');
       qb = qb.leftJoin('project.users', 'whereUser');
       if (options.q) {
         qb = qb.andWhere('(status.title like :q or status.name like :q or status.id = :id)', {

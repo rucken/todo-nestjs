@@ -9,6 +9,7 @@ export class TasksService {
   constructor(@InjectRepository(Task) private readonly repository: Repository<Task>) {}
 
   async create(options: { item: Task }, user?: User) {
+    options.item.createdUser = user;
     try {
       options.item = await this.repository.save(options.item);
       return { task: options.item };
@@ -26,6 +27,7 @@ export class TasksService {
       throw error;
     }
     options.item.id = options.id;
+    options.item.updatedUser = user;
     try {
       options.item = await this.repository.save(options.item);
       return { task: options.item };
@@ -54,7 +56,7 @@ export class TasksService {
   private async checkAccess(id: number, user: User) {
     let data: { task: Task };
     try {
-      data = await this.findById({ id }, user);
+      data = await this.findById({ id }, user, true);
     } catch (error) {
       throw error;
     }
@@ -63,13 +65,18 @@ export class TasksService {
     );
   }
 
-  async findById(options: { id: number }, user?: User) {
+  async findById(options: { id: number }, user?: User, includeProjectUsers?: boolean) {
     try {
       let object: Task;
       let qb = this.repository.createQueryBuilder('task');
       qb = qb.leftJoinAndSelect('task.project', 'project');
       qb = qb.leftJoinAndSelect('task.status', 'status');
-      qb = qb.leftJoinAndSelect('project.users', 'user');
+      if (includeProjectUsers) {
+        qb = qb.leftJoinAndSelect('project.users', 'user');
+      }
+      qb = qb.leftJoinAndSelect('task.assignedUser', 'assignedUser');
+      qb = qb.leftJoinAndSelect('task.createdUser', 'createdUser');
+      qb = qb.leftJoinAndSelect('task.updatedUser', 'updatedUser');
       qb = qb.leftJoin('project.users', 'whereUser');
       qb = qb.andWhere('task.id = :id', { id: +options.id });
       if (user) {
@@ -96,6 +103,8 @@ export class TasksService {
       q?: string;
       sort?: string;
       project?: number;
+      usersIds: number[];
+      statusesNames: string[];
     },
     user?: User
   ) {
@@ -104,7 +113,9 @@ export class TasksService {
       let qb = this.repository.createQueryBuilder('task');
       qb = qb.leftJoinAndSelect('task.project', 'project');
       qb = qb.leftJoinAndSelect('task.status', 'status');
-      qb = qb.leftJoinAndSelect('project.users', 'user');
+      qb = qb.leftJoinAndSelect('task.assignedUser', 'assignedUser');
+      qb = qb.leftJoinAndSelect('task.createdUser', 'createdUser');
+      qb = qb.leftJoinAndSelect('task.updatedUser', 'updatedUser');
       qb = qb.leftJoin('project.users', 'whereUser');
       if (options.q) {
         qb = qb.andWhere('(task.title like :q or task.description like :q or task.id = :id)', {
@@ -124,6 +135,16 @@ export class TasksService {
         });
       } else {
         qb = qb.andWhere('project.is_public = 1');
+      }
+      if (options.usersIds.length > 0) {
+        qb = qb.andWhere('(assignedUser.id in (:...usersIds))', {
+          usersIds: options.usersIds
+        });
+      }
+      if (options.statusesNames.length > 0) {
+        qb = qb.andWhere('(status.name in (:...statusesNames))', {
+          statusesNames: options.statusesNames
+        });
       }
       options.sort = options.sort && new Task().hasOwnProperty(options.sort.replace('-', '')) ? options.sort : '-id';
       const field = options.sort.replace('-', '');

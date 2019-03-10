@@ -1,5 +1,4 @@
-import { CustomValidationError, User } from '@rucken/core-nestjs';
-import { Type } from 'class-transformer';
+import { CustomValidationError, User1524199022084 } from '@rucken/core-nestjs';
 import { IsNotEmpty, IsOptional, MaxLength, validateSync } from 'class-validator';
 import {
   BeforeInsert,
@@ -7,19 +6,17 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
   JoinTable,
   ManyToMany,
-  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from 'typeorm';
-import { Status } from './status.entity';
-import { Task } from './task.entity';
+import { Status1538225369404 } from './status.entity';
+import { Task1538225369404 } from './task.entity';
 
 @Entity({ name: 'projects' })
-export class Project {
+export class Project1538225369404 {
   @PrimaryGeneratedColumn()
   id: number = undefined;
 
@@ -42,13 +39,13 @@ export class Project {
   @UpdateDateColumn({ name: 'updated_at', nullable: true })
   updatedAt: Date = undefined;
 
-  @OneToMany(type => Status, status => status.project)
-  statuses: Status[];
+  @OneToMany(type => Status1538225369404, status => status.project)
+  statuses: Status1538225369404[];
 
-  @OneToMany(type => Task, task => task.project)
-  tasks: Task[];
+  @OneToMany(type => Task1538225369404, task => task.project)
+  tasks: Task1538225369404[];
 
-  @ManyToMany(type => User, {
+  @ManyToMany(type => User1524199022084, {
     cascade: true
   })
   @JoinTable({
@@ -62,31 +59,7 @@ export class Project {
       referencedColumnName: 'id'
     }
   })
-  users: User[];
-
-  @Type(() => User)
-  @ManyToOne(type => User, { eager: true, nullable: true })
-  @JoinColumn({ name: 'created_user_id' })
-  createdUser: User = undefined;
-
-  @Type(() => User)
-  @ManyToOne(type => User, { eager: true, nullable: true })
-  @JoinColumn({ name: 'updated_user_id' })
-  updatedUser: User = undefined;
-
-  @Column({
-    name: 'tasksCount',
-    select: false,
-    nullable: true
-  })
-  tasksCount: number = undefined;
-
-  @Column({
-    name: 'completedTasksCount',
-    select: false,
-    nullable: true
-  })
-  completedTasksCount: number = undefined;
+  users: User1524199022084[];
 
   @BeforeInsert()
   doBeforeInsertion() {

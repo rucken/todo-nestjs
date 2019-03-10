@@ -27,4 +27,20 @@ export class ProjectDto {
   @Type(() => UserDto)
   @ApiModelProperty({ type: UserDto, isArray: true })
   users: UserDto[];
+
+  @Type(() => UserDto)
+  @IsNotEmpty()
+  @ApiModelProperty({ type: UserDto })
+  createdUser: UserDto;
+
+  @Type(() => UserDto)
+  @IsNotEmpty()
+  @ApiModelProperty({ type: UserDto })
+  updatedUser: UserDto;
+
+  @ApiModelPropertyOptional({ type: Number })
+  tasksCount: number;
+
+  @ApiModelPropertyOptional({ type: Number })
+  completedTasksCount: number;
 }
