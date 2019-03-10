@@ -25,9 +25,6 @@ export class ProjectsUsersService {
       let qb = this.userRepository.createQueryBuilder('user');
       qb = qb.innerJoinAndSelect('user_projects', 'up', 'up.user_id=user.id');
       qb = qb.innerJoinAndSelect('projects', 'project', 'up.project_id=project.id');
-      qb = qb.leftJoinAndSelect('user.groups', 'group');
-      qb = qb.leftJoinAndSelect('group.permissions', 'permission');
-      qb = qb.leftJoinAndSelect('permission.contentType', 'contentType');
       if (options.q) {
         qb = qb.where('user.first_name like :q or user.last_name like :q or user.username like :q or user.id = :id', {
           q: `%${options.q}%`,

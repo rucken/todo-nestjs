@@ -30,7 +30,7 @@ export class TasksController {
   constructor(
     @Inject(CORE_CONFIG_TOKEN) private readonly coreConfig: ICoreConfig,
     private readonly service: TasksService
-  ) {}
+  ) { }
 
   @Roles('isSuperuser')
   @Permissions('add_task')
@@ -187,7 +187,9 @@ export class TasksController {
     @Query('per_page', new ParseIntWithDefaultPipe(10)) perPage,
     @Query('q') q,
     @Query('sort') sort,
-    @Query('project') project
+    @Query('project') project,
+    @Query('users') usersIds,
+    @Query('statuses') statusesNames
   ) {
     try {
       return plainToClass(
@@ -198,7 +200,9 @@ export class TasksController {
             perPage,
             q,
             sort,
-            project
+            project,
+            usersIds: usersIds ? usersIds.split(',').filter(id => !isNaN(+id)).map(id => +id) : [],
+            statusesNames: statusesNames ? statusesNames.split(',').map(name => name.trim()) : []
           },
           req.user
         )

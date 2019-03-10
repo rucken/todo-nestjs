@@ -118,9 +118,6 @@ export class ProjectsService {
       let qb = this.repository.createQueryBuilder('project');
       qb = qb.leftJoinAndSelect('project.users', 'user');
       qb = qb.leftJoin('project.users', 'whereUser');
-      qb = qb.leftJoinAndSelect('user.groups', 'group');
-      qb = qb.leftJoinAndSelect('group.permissions', 'permission');
-      qb = qb.leftJoinAndSelect('permission.contentType', 'contentType');
       qb = qb.leftJoinAndSelect('project.statuses', 'status');
       qb = qb.leftJoinAndSelect('project.createdUser', 'createdUser');
       qb = qb.leftJoinAndSelect('project.updatedUser', 'updatedUser');
@@ -186,9 +183,6 @@ export class ProjectsService {
       let qb = this.repository.createQueryBuilder('project');
       qb = qb.leftJoinAndSelect('project.users', 'user');
       qb = qb.leftJoin('project.users', 'whereUser');
-      qb = qb.leftJoinAndSelect('user.groups', 'group');
-      qb = qb.leftJoinAndSelect('group.permissions', 'permission');
-      qb = qb.leftJoinAndSelect('permission.contentType', 'contentType');
       qb = qb.leftJoinAndSelect('project.statuses', 'status');
       qb = qb.leftJoinAndSelect('project.createdUser', 'createdUser');
       qb = qb.leftJoinAndSelect('project.updatedUser', 'updatedUser');
@@ -226,8 +220,8 @@ export class ProjectsService {
         });
       }
       if (options.statusesNames.length > 0) {
-        qb = qb.andWhere('(status.name in (:...statusesIds))', {
-          statusesIds: options.statusesNames
+        qb = qb.andWhere('(status.name in (:...statusesNames))', {
+          statusesNames: options.statusesNames
         });
       }
       options.sort = options.sort && new Project().hasOwnProperty(options.sort.replace('-', '')) ? options.sort : '-id';

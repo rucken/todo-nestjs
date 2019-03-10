@@ -63,6 +63,11 @@ export class Task {
   @JoinColumn({ name: 'updated_user_id' })
   updatedUser: User = undefined;
 
+  @Type(() => User)
+  @ManyToOne(type => User, { eager: true, nullable: true })
+  @JoinColumn({ name: 'assigned_user_id' })
+  assignedUser: User = undefined;
+
   @BeforeInsert()
   doBeforeInsertion() {
     const errors = validateSync(this, { validationError: { target: false } });

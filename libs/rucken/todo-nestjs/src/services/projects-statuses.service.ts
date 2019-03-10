@@ -22,7 +22,6 @@ export class ProjectsStatusesService {
       let objects: [Status[], number];
       let qb = this.repository.createQueryBuilder('status');
       qb = qb.leftJoinAndSelect('status.project', 'project');
-      qb = qb.leftJoin('project.users', 'user');
       qb = qb.leftJoin('project.users', 'whereUser');
       if (options.q) {
         qb = qb.andWhere('(status.title like :q or status.name like :q or status.id = :id)', {
