@@ -108,7 +108,7 @@
     "connection-string": "1.0.1",
     "cp-cli": "2.0.0",
     "del-cli": "1.1.0",
-    "dotenv": "6.2.0",
+    "dotenv": "7.0.0",
     "fast-glob": "2.2.6",
     "fastify-formbody": "2.1.0",
     "highlight.js": "9.13.1",
