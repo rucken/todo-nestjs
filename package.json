@@ -136,7 +136,7 @@
     "@angular/compiler": "7.2.8",
     "@angular/compiler-cli": "7.2.8",
     "@angular/core": "7.2.8",
-    "@nestjs/schematics": "5.11.2",
+    "@nestjs/schematics": "6.0.1",
     "@nestjs/testing": "5.7.4",
     "@nrwl/builders": "7.6.2",
     "@nrwl/schematics": "7.6.2",
