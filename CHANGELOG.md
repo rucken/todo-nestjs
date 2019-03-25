@@ -1,3 +1,13 @@
+## [4.1.1](https://github.com/rucken/todo-nestjs/compare/4.1.0...4.1.1) (2019-03-25)
+
+
+### Bug Fixes
+
+* Exclude  tasksCount and completedTasksCount from InProjectDto ([2d28e88](https://github.com/rucken/todo-nestjs/commit/2d28e88))
+* Update dependencies ([59da9bf](https://github.com/rucken/todo-nestjs/commit/59da9bf))
+
+
+
 # [4.1.0](https://github.com/rucken/todo-nestjs/compare/4.0.4...4.1.0) (2019-03-10)
 
 
