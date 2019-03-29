@@ -90,7 +90,7 @@
   "dependencies": {
     "@angular-devkit/architect": "0.13.6",
     "@angular-devkit/build-angular": "0.13.6",
-    "@angular-devkit/core": "7.3.6",
+    "@angular-devkit/core": "7.3.7",
     "@angular-devkit/schematics": "7.3.6",
     "@nestjs/common": "5.7.4",
     "@nestjs/core": "5.7.4",
