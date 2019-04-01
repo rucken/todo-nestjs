@@ -1,9 +1,9 @@
 import { DynamicModule, Module, Provider } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AuthModule } from '@rucken/auth-nestjs';
-import { CoreModule } from '@rucken/core-nestjs';
-import { TodoModule } from '@rucken/todo-nestjs';
+import { RuckenAuthModule } from '@rucken/auth-nestjs';
+import { RuckenCoreModule } from '@rucken/core-nestjs';
+import { RuckenTodoModule } from '@rucken/todo-nestjs';
 @Module({})
 export class AppModule {
   static forRoot(options: { providers: Provider[]; passportProviders: Provider[] }): DynamicModule {
@@ -11,9 +11,9 @@ export class AppModule {
       module: AppModule,
       imports: [
         PassportModule.register({ defaultStrategy: 'jwt' }),
-        CoreModule.forRoot(options),
-        AuthModule.forRoot(options),
-        TodoModule.forRoot(options),
+        RuckenCoreModule.forRoot(options),
+        RuckenAuthModule.forRoot(options),
+        RuckenTodoModule.forRoot(options),
         TypeOrmModule.forRoot()
       ],
       providers: [...options.providers, ...(options.passportProviders ? options.passportProviders : [])]
