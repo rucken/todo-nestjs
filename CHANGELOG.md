@@ -1,3 +1,12 @@
+## [4.1.2](https://github.com/rucken/todo-nestjs/compare/4.1.1...4.1.2) (2019-04-01)
+
+
+### Bug Fixes
+
+* Rename module names ([365ba66](https://github.com/rucken/todo-nestjs/commit/365ba66))
+
+
+
 ## [4.1.1](https://github.com/rucken/todo-nestjs/compare/4.1.0...4.1.1) (2019-03-25)
 
 
