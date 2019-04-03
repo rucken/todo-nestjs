@@ -80,6 +80,7 @@
     "format:check": "./node_modules/.bin/nx format:check",
     "workspace-schematic": "./node_modules/.bin/nx workspace-schematic",
     "dep-graph": "./node_modules/.bin/nx dep-graph",
+    "preinstall": "sh ./scripts/preinstall.sh",
     "postinstall": "sh ./scripts/postinstall.sh",
     "pm2:start": "cross-env NODE_ENV=production ./node_modules/.bin/pm2 start dist/demo/main.js --name demo",
     "pm2:stop": "./node_modules/.bin/pm2 kill --name demo",
