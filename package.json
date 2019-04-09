@@ -140,7 +140,7 @@
     "@nestjs/testing": "5.7.4",
     "@nrwl/builders": "7.7.2",
     "@nrwl/schematics": "7.7.2",
-    "@rucken/cli": "3.3.3",
+    "@rucken/cli": "3.3.4",
     "@types/dotenv": "6.1.0",
     "@types/express": "4.16.1",
     "@types/jasmine": "3.3.9",
