@@ -1,3 +1,12 @@
+## [4.1.3](https://github.com/rucken/todo-nestjs/compare/4.1.2...4.1.3) (2019-04-23)
+
+
+### Bug Fixes
+
+* Exclude virtual fields ([261e4ec](https://github.com/rucken/todo-nestjs/commit/261e4ec))
+
+
+
 ## [4.1.2](https://github.com/rucken/todo-nestjs/compare/4.1.1...4.1.2) (2019-04-01)
 
 
