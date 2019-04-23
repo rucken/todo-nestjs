@@ -29,12 +29,10 @@ export class ProjectDto {
   users: UserDto[];
 
   @Type(() => UserDto)
-  @IsNotEmpty()
   @ApiModelProperty({ type: UserDto })
   createdUser: UserDto;
 
   @Type(() => UserDto)
-  @IsNotEmpty()
   @ApiModelProperty({ type: UserDto })
   updatedUser: UserDto;
 

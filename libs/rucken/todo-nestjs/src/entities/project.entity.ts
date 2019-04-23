@@ -74,19 +74,9 @@ export class Project {
   @JoinColumn({ name: 'updated_user_id' })
   updatedUser: User = undefined;
 
-  @Column({
-    name: 'tasksCount',
-    select: false,
-    nullable: true
-  })
-  tasksCount: number = undefined;
+  tasksCount: number;
 
-  @Column({
-    name: 'completedTasksCount',
-    select: false,
-    nullable: true
-  })
-  completedTasksCount: number = undefined;
+  completedTasksCount: number;
 
   @BeforeInsert()
   doBeforeInsertion() {
