@@ -150,7 +150,7 @@
     "@types/node": "10.12.18",
     "@types/supertest": "2.0.7",
     "codelyzer": "4.5.0",
-    "conventional-changelog-cli": "2.0.12",
+    "conventional-changelog-cli": "2.0.17",
     "conventional-commits-detector": "1.0.2",
     "conventional-recommended-bump": "4.0.4",
     "jest": "24.1.0",
