@@ -139,7 +139,7 @@
     "@angular/core": "7.2.13",
     "@nestjs/schematics": "5.11.2",
     "@nestjs/testing": "5.7.4",
-    "@nrwl/builders": "7.8.1",
+    "@nrwl/builders": "7.8.2",
     "@nrwl/schematics": "7.8.1",
     "@rucken/cli": "4.0.1",
     "@types/dotenv": "6.1.0",
