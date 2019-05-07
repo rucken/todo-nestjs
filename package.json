@@ -133,7 +133,7 @@
     "cross-env": "5.2.0"
   },
   "devDependencies": {
-    "@angular/cli": "7.3.8",
+    "@angular/cli": "7.3.9",
     "@angular/compiler": "7.2.13",
     "@angular/compiler-cli": "7.2.13",
     "@angular/core": "7.2.13",
