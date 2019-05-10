@@ -1,4 +1,5 @@
 import { NestFactory } from '@nestjs/core';
+import { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import 'reflect-metadata';
 import { register } from 'tsconfig-paths';
@@ -22,7 +23,7 @@ async function bootstrap() {
   /**
    * Create nest application
    */
-  const app = await NestFactory.create(
+  const app = await NestFactory.create<NestExpressApplication>(
     AppModule.forRoot({
       providers: [...config.core.providers(), ...config.auth.providers()],
       passportProviders: config.auth.passportProviders()
