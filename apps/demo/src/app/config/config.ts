@@ -12,7 +12,7 @@ import {
 } from '@rucken/auth-nestjs';
 import { CORE_APP_FILTERS, CORE_APP_PIPES, CORE_CONFIG_TOKEN, DEFAULT_CORE_CONFIG } from '@rucken/core-nestjs';
 import { ConnectionString } from 'connection-string';
-import { load } from 'dotenv';
+import { config as load } from 'dotenv';
 import { accessSync, readFileSync } from 'fs';
 import * as path from 'path';
 import { IDemoConfig } from './config.interface';
@@ -23,8 +23,8 @@ const connectionString = new ConnectionString(process.env.DATABASE_URL || 'sqlit
 const dbFile =
   connectionString.protocol === 'sqlite'
     ? './' +
-      (connectionString.hosts ? connectionString.hosts[0].name : '') +
-      (connectionString.path ? '/' + connectionString.path[0] : '')
+    (connectionString.hosts ? connectionString.hosts[0].name : '') +
+    (connectionString.path ? '/' + connectionString.path[0] : '')
     : '';
 try {
   accessSync(envFile);

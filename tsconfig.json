@@ -20,10 +20,10 @@
     "baseUrl": ".",
     "paths": {
       "@rucken/todo-nestjs": [
-        "dist/rucken/todo-nestjs"
+        "libs/rucken/todo-nestjs/src"
       ],
       "@rucken/todo-nestjs/*": [
-        "dist/rucken/todo-nestjs/*"
+        "libs/rucken/todo-nestjs/src/*"
       ]
     }
   },
