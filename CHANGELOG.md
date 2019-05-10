@@ -1,3 +1,12 @@
+## [4.1.4](https://github.com/rucken/todo-nestjs/compare/4.1.3...4.1.4) (2019-05-10)
+
+
+### Bug Fixes
+
+* Update dependencies ([638b9e2](https://github.com/rucken/todo-nestjs/commit/638b9e2))
+
+
+
 ## [4.1.3](https://github.com/rucken/todo-nestjs/compare/4.1.2...4.1.3) (2019-04-23)
 
 
