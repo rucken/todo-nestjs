@@ -8,7 +8,14 @@
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/rucken/todo-nestjs)
 
-A simple todo application with [NestJS](https://github.com/nestjs/nest) (Projects, Tasks, Statuses)
+A simple todo application with [NestJS](https://github.com/nestjs/nest) (Projects, Tasks, Statuses) based on [Rucken](https://rucken.io) template
+
+## Screenshots
+<p>
+  <img src="https://rucken.io/assets/rucken-todo/nestjs/rucken-todo-nestjs-home-page.png" width="250" title="NestJS: Start page with README.md">
+  <img src="https://rucken.io/assets/rucken-todo/nestjs/rucken-todo-nestjs-swagger-page.png" width="250" title="NestJS: Swagger page">
+  <img src="https://rucken.io/assets/rucken-todo/nestjs/rucken-todo-nestjs-project-dto.png" width="250" title="NestJS: Project DTO">
+</p>
 
 ## Usage
 
