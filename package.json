@@ -99,7 +99,7 @@
     "@nestjs/platform-express": "^6.1.1",
     "@nestjs/swagger": "3.0.2",
     "@nestjs/typeorm": "6.1.0",
-    "@nrwl/nx": "7.8.5",
+    "@nrwl/nx": "7.8.7",
     "@rucken/auth-nestjs": "1.0.12",
     "@rucken/core-nestjs": "1.0.12",
     "@types/passport-facebook-token": "0.4.33",
