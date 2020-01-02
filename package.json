@@ -102,7 +102,7 @@
     "@nrwl/nx": "7.8.5",
     "@rucken/auth-nestjs": "1.0.12",
     "@rucken/core-nestjs": "1.0.12",
-    "@types/passport-facebook-token": "0.4.33",
+    "@types/passport-facebook-token": "0.4.34",
     "@types/passport-local": "1.0.33",
     "chmod": "0.2.1",
     "class-transformer": "0.2.0",
