@@ -8,13 +8,13 @@
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/rucken/todo-nestjs)
 
-A simple todo application with [NestJS](https://github.com/nestjs/nest) (Projects, Tasks, Statuses) based on [Rucken](https://rucken.io) template
+A simple todo application with [NestJS](https://github.com/nestjs/nest) (Projects, Tasks, Statuses) based on [Rucken](https://rucken.ru) template
 
 ## Screenshots
 <p>
-  <img src="https://rucken.io/assets/rucken-todo/nestjs/rucken-todo-nestjs-home-page.png" width="250" title="NestJS: Start page with README.md">
-  <img src="https://rucken.io/assets/rucken-todo/nestjs/rucken-todo-nestjs-swagger-page.png" width="250" title="NestJS: Swagger page">
-  <img src="https://rucken.io/assets/rucken-todo/nestjs/rucken-todo-nestjs-project-dto.png" width="250" title="NestJS: Project DTO">
+  <img src="https://rucken.ru/assets/rucken-todo/nestjs/rucken-todo-nestjs-home-page.png" width="250" title="NestJS: Start page with README.md">
+  <img src="https://rucken.ru/assets/rucken-todo/nestjs/rucken-todo-nestjs-swagger-page.png" width="250" title="NestJS: Swagger page">
+  <img src="https://rucken.ru/assets/rucken-todo/nestjs/rucken-todo-nestjs-project-dto.png" width="250" title="NestJS: Project DTO">
 </p>
 
 ## Usage
@@ -29,7 +29,7 @@ A simple todo application with [NestJS](https://github.com/nestjs/nest) (Project
 
 ## Demo
 
-[https://todo-nestjs.rucken.io](https://todo-nestjs.rucken.io) - Application with [Sqlite](https://www.sqlite.org/index.html) Database on VPS with [Dokku](http://dokku.viewdocs.io/dokku/)
+[https://todo-nestjs.rucken.ru](https://todo-nestjs.rucken.ru) - Application with [Sqlite](https://www.sqlite.org/index.html) Database on VPS with [Dokku](http://dokku.viewdocs.io/dokku/)
 
 ### Users
 
@@ -40,13 +40,13 @@ A simple todo application with [NestJS](https://github.com/nestjs/nest) (Project
 ### Swagger
 
 - local: [`http://localhost:5000/swagger`](http://localhost:5000/swagger)
-- online: [`https://todo-nestjs.rucken.io/swagger`](https://todo-nestjs.rucken.io/swagger)
+- online: [`https://todo-nestjs.rucken.ru/swagger`](https://todo-nestjs.rucken.ru/swagger)
 - apiKey template: `JWT <token_generated_on_login>`
 
 ## Typedoc documentations
 
 - local: [`http://localhost:5000/docs`](http://localhost:5000/docs)
-- online: [`https://todo-nestjs.rucken.io/docs`](https://todo-nestjs.rucken.io/docs)
+- online: [`https://todo-nestjs.rucken.ru/docs`](https://todo-nestjs.rucken.ru/docs)
 
 
 ## License

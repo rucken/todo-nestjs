@@ -20,7 +20,7 @@ A simple todo application with [NestJS](https://github.com/nestjs/nest) (Project
 
 ## Demo
 
-[https://todo-nestjs.rucken.io](https://todo-nestjs.rucken.io) - Application with [Sqlite](https://www.sqlite.org/index.html) Database on VPS with [Dokku](http://dokku.viewdocs.io/dokku/)
+[https://todo-nestjs.rucken.ru](https://todo-nestjs.rucken.ru) - Application with [Sqlite](https://www.sqlite.org/index.html) Database on VPS with [Dokku](http://dokku.viewdocs.io/dokku/)
 
 ### Users
 
@@ -31,13 +31,13 @@ A simple todo application with [NestJS](https://github.com/nestjs/nest) (Project
 ### Swagger
 
 - local: [`http://localhost:5000/swagger`](http://localhost:5000/swagger)
-- online: [`https://todo-nestjs.rucken.io/swagger`](https://todo-nestjs.rucken.io/swagger)
+- online: [`https://todo-nestjs.rucken.ru/swagger`](https://todo-nestjs.rucken.ru/swagger)
 - apiKey template: `JWT <token_generated_on_login>`
 
 ## Typedoc documentations
 
 - local: [`http://localhost:5000/docs`](http://localhost:5000/docs)
-- online: [`https://todo-nestjs.rucken.io/docs`](https://todo-nestjs.rucken.io/docs)
+- online: [`https://todo-nestjs.rucken.ru/docs`](https://todo-nestjs.rucken.ru/docs)
 
 ## License
 
